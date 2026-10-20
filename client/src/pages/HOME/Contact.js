@@ -42,26 +42,26 @@ const Contact = () => {
   }, []);
 
   return (
-    <section className="py-16 px-4 md:px-8 bg-gray-900/60 border-t border-gray-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
+    <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800">
+      <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Info Column */}
           <div>
             <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold mb-1 block">
               Get In Touch
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-2">
               Let's Talk About Your Project
             </h2>
-            <p className="text-sm text-gray-300 leading-relaxed mb-6 max-w-md">
+            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-5 max-w-md">
               {contactDescription ||
                 "Have a question, proposal, or want to collaborate? Feel free to reach out anytime."}
             </p>
 
-            <div className="space-y-3.5 text-sm text-gray-300">
+            <div className="space-y-3 text-xs sm:text-sm text-gray-300">
               {gmail && (
                 <div className="flex items-center gap-3">
-                  <span className="p-2.5 rounded-lg bg-gray-800 text-sky-400">
+                  <span className="p-2 rounded-lg bg-gray-800 text-sky-400">
                     <IoMail className="text-base" />
                   </span>
                   <Link to={`mailto:${gmail}`} className="hover:text-sky-400 transition">
@@ -72,8 +72,8 @@ const Contact = () => {
 
               {phoneNo && (
                 <div className="flex items-center gap-3">
-                  <span className="p-2.5 rounded-lg bg-gray-800 text-sky-400">
-                    <FaPhoneAlt className="text-sm" />
+                  <span className="p-2 rounded-lg bg-gray-800 text-sky-400">
+                    <FaPhoneAlt className="text-xs sm:text-sm" />
                   </span>
                   <Link to={`tel:${phoneNo}`} className="font-mono hover:text-sky-400 transition">
                     {phoneNo}
@@ -83,8 +83,8 @@ const Contact = () => {
 
               {currentLocation && (
                 <div className="flex items-center gap-3">
-                  <span className="p-2.5 rounded-lg bg-gray-800 text-sky-400">
-                    <FaLocationDot className="text-sm" />
+                  <span className="p-2 rounded-lg bg-gray-800 text-sky-400">
+                    <FaLocationDot className="text-xs sm:text-sm" />
                   </span>
                   <span>{currentLocation}</span>
                 </div>
@@ -93,9 +93,9 @@ const Contact = () => {
           </div>
 
           {/* Right Form Column */}
-          <div className="bg-gray-800/80 border border-gray-700/80 p-6 md:p-8 rounded-2xl shadow-xl">
-            <h3 className="text-lg font-bold text-white mb-4">Send a Message</h3>
-            <form onSubmit={onSubmit} className="space-y-4">
+          <div className="bg-gray-800/80 border border-gray-700/80 p-5 sm:p-6 md:p-7 rounded-xl shadow-xl w-full">
+            <h3 className="text-base sm:text-lg font-bold text-white mb-3">Send a Message</h3>
+            <form onSubmit={onSubmit} className="space-y-3 sm:space-y-3.5">
               <div>
                 <label htmlFor="name" className="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-1">
                   Your Name
@@ -108,7 +108,7 @@ const Contact = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Alex Smith"
-                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-lg py-2 px-3 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                 />
               </div>
 
@@ -124,7 +124,7 @@ const Contact = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="alex@example.com"
-                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-lg py-2 px-3 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                 />
               </div>
 
@@ -136,24 +136,24 @@ const Contact = () => {
                   name="message"
                   id="message"
                   required
-                  rows="4"
+                  rows="3"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="How can I help you?"
-                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-lg py-2 px-3 text-white text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 px-4 rounded-xl font-semibold text-white bg-sky-600 hover:bg-sky-500 transition shadow-lg shadow-sky-600/30 text-sm"
+                className="w-full py-2.5 px-4 rounded-lg font-semibold text-white bg-sky-600 hover:bg-sky-500 transition shadow-md shadow-sky-600/30 text-xs sm:text-sm"
               >
                 Send Message
               </button>
             </form>
 
             {successMessage && (
-              <div className="mt-4 p-3 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs text-center rounded-xl font-medium">
+              <div className="mt-3 p-2.5 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs text-center rounded-lg font-medium">
                 ✓ {successMessage}
               </div>
             )}

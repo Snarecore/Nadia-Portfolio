@@ -28,7 +28,7 @@ const LeftSlider = () => {
   if (!hasAnyLink) return null;
 
   return (
-    <div className="static sm:fixed left-4 bottom-0 z-40 hidden sm:block">
+    <div className="hidden xl:block fixed left-4 2xl:left-8 bottom-0 z-40">
       <div className="flex flex-col items-center gap-3">
         {linkedinLink && (
           <Link to={linkedinLink} target="_blank" className="text-gray-400 hover:text-sky-400 text-lg transition">

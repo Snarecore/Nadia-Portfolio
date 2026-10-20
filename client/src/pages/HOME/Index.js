@@ -35,7 +35,7 @@ const Index = () => {
         scrollToProjects={scrollToProjects}
         scrollToContact={scrollToContact}
       />
-      <div className="w-full bg-white dark:bg-gray-900 text-black dark:text-white">
+      <div className="w-full bg-white dark:bg-gray-900 text-black dark:text-white min-h-screen overflow-x-hidden">
         <div ref={introRef}>
           <Intro />
         </div>

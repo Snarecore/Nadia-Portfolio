@@ -27,45 +27,45 @@ const Slider = ({ projectData }) => {
   const currentProject = projectData[currentProjectIndex];
 
   return (
-    <div className="bg-gray-900/60 border border-gray-800 p-6 md:p-8 rounded-2xl shadow-xl mt-6">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+    <div className="bg-gray-900/60 border border-gray-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-xl mt-4">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
         {/* Left Side: Project Details */}
-        <div className="flex-1 space-y-4">
+        <div className="flex-1 space-y-3 w-full">
           <div className="flex items-center justify-between">
-            <span className="text-3xl md:text-4xl font-mono font-extrabold text-sky-400">
+            <span className="text-2xl sm:text-3xl md:text-4xl font-mono font-extrabold text-sky-400">
               #{currentProject.projectNo}
             </span>
             {/* Mobile Controls */}
-            <div className="flex md:hidden items-center gap-3">
+            <div className="flex md:hidden items-center gap-2">
               <button
                 onClick={prevProject}
-                className="p-2 rounded-lg bg-gray-800 text-gray-300 hover:text-white hover:bg-sky-600 transition"
+                className="p-1.5 rounded-lg bg-gray-800 text-gray-300 hover:text-white hover:bg-sky-600 transition"
               >
-                <TbPlayerTrackPrevFilled className="text-sm" />
+                <TbPlayerTrackPrevFilled className="text-xs" />
               </button>
               <button
                 onClick={nextProject}
-                className="p-2 rounded-lg bg-gray-800 text-gray-300 hover:text-white hover:bg-sky-600 transition"
+                className="p-1.5 rounded-lg bg-gray-800 text-gray-300 hover:text-white hover:bg-sky-600 transition"
               >
-                <TbPlayerTrackNextFilled className="text-sm" />
+                <TbPlayerTrackNextFilled className="text-xs" />
               </button>
             </div>
           </div>
 
-          <h3 className="text-xl md:text-2xl font-bold text-white">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
             {currentProject.projectTitle}
           </h3>
 
-          <p className="text-sm text-gray-300 leading-relaxed max-w-lg">
+          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-lg">
             {currentProject.projectParagraph}
           </p>
 
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex items-center gap-3 pt-1">
             {currentProject.projectLiveLink && (
               <Link
                 to={currentProject.projectLiveLink}
                 target="_blank"
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg transition shadow"
+                className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold bg-sky-600 hover:bg-sky-500 text-white px-3.5 py-1.5 rounded-lg transition shadow"
               >
                 <span>Live Demo</span>
                 <FaArrowUpRightFromSquare className="text-xs" />
@@ -75,9 +75,9 @@ const Slider = ({ projectData }) => {
               <Link
                 to={currentProject.projectGithubLink}
                 target="_blank"
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold border border-gray-700 bg-gray-800 hover:border-sky-500 text-gray-300 hover:text-white px-4 py-2 rounded-lg transition"
+                className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold border border-gray-700 bg-gray-800 hover:border-sky-500 text-gray-300 hover:text-white px-3.5 py-1.5 rounded-lg transition"
               >
-                <BsGithub className="text-sm" />
+                <BsGithub className="text-xs" />
                 <span>Source Code</span>
               </Link>
             )}
@@ -90,32 +90,32 @@ const Slider = ({ projectData }) => {
             <img
               src={currentProject.projectImage}
               alt={currentProject.projectTitle}
-              className="w-full md:w-96 h-52 sm:h-60 object-cover rounded-xl shadow-lg border border-gray-700/80 mb-4"
+              className="w-full max-w-sm sm:max-w-md md:w-80 lg:w-96 h-44 sm:h-52 md:h-56 object-cover rounded-xl shadow-lg border border-gray-700/80 mb-3"
             />
           ) : (
-            <div className="w-full md:w-96 h-52 bg-gray-800 rounded-xl mb-4 flex items-center justify-center text-gray-500 text-sm">
+            <div className="w-full max-w-sm sm:max-w-md md:w-80 lg:w-96 h-44 sm:h-52 md:h-56 bg-gray-800 rounded-xl mb-3 flex items-center justify-center text-gray-500 text-xs sm:text-sm">
               No preview image
             </div>
           )}
 
           {/* Desktop Navigation Arrows */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <button
               onClick={prevProject}
-              className="p-2.5 rounded-xl bg-gray-800 hover:bg-sky-600 hover:text-white text-gray-300 transition"
+              className="p-2 rounded-lg bg-gray-800 hover:bg-sky-600 hover:text-white text-gray-300 transition"
               title="Previous Project"
             >
-              <TbPlayerTrackPrevFilled className="text-sm" />
+              <TbPlayerTrackPrevFilled className="text-xs" />
             </button>
             <span className="text-xs text-gray-400 font-mono">
               {currentProjectIndex + 1} / {projectData.length}
             </span>
             <button
               onClick={nextProject}
-              className="p-2.5 rounded-xl bg-gray-800 hover:bg-sky-600 hover:text-white text-gray-300 transition"
+              className="p-2 rounded-lg bg-gray-800 hover:bg-sky-600 hover:text-white text-gray-300 transition"
               title="Next Project"
             >
-              <TbPlayerTrackNextFilled className="text-sm" />
+              <TbPlayerTrackNextFilled className="text-xs" />
             </button>
           </div>
         </div>

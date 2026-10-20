@@ -20,17 +20,17 @@ const Navbar = ({
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-800 text-white transition-all">
-      <div className="max-w-6xl mx-auto flex justify-between items-center px-4 md:px-8 py-3.5">
+    <nav className="fixed top-0 left-0 right-0 bg-gray-900/85 backdrop-blur-md z-50 border-b border-gray-800 text-white transition-all">
+      <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3">
         <Link
           to={"/"}
-          className="text-2xl font-extrabold tracking-tight text-white hover:text-sky-400 transition"
+          className="text-xl sm:text-2xl font-extrabold tracking-tight text-white hover:text-sky-400 transition"
         >
           ZRF<span className="text-sky-500">.</span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-7 text-sm font-medium text-gray-300">
+        <div className="hidden md:flex items-center space-x-5 lg:space-x-7 text-xs sm:text-sm font-medium text-gray-300">
           <button onClick={scrollToIntro} className="hover:text-sky-400 transition">
             Home
           </button>
@@ -48,16 +48,16 @@ const Navbar = ({
           </button>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3">
           <button
             onClick={scrollToContact}
-            className="hidden sm:inline-block text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-4 py-2 rounded-lg transition duration-200"
+            className="hidden sm:inline-block text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-3.5 py-1.5 rounded-lg transition duration-200"
           >
             Hire Me
           </button>
           <button
             onClick={toggleOpen}
-            className="md:hidden text-gray-300 hover:text-white p-1 focus:outline-none"
+            className="md:hidden text-gray-300 hover:text-white p-1.5 focus:outline-none"
             aria-label="Toggle navigation"
           >
             {isOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
