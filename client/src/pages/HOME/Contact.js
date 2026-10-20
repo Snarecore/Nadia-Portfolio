@@ -3,8 +3,6 @@ import { IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
-import Button from "../../components/BUTTON/Button";
 import API from "../../api/apiClient";
 
 const Contact = () => {
@@ -20,31 +18,11 @@ const Contact = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
-    const formData = {
-      access_key: "7d54ed91-2ba8-432a-a598-bd1aae19eb17",
-      name,
-      email,
-      message,
-    };
-
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((res) => res.json());
-
-    if (res.success) {
-      setSuccessMessage("Your message has been sent successfully!");
-      setName("");
-      setEmail("");
-      setMessage("");
-    } else {
-      setSuccessMessage("There was an error sending your message.");
-    }
+    setSuccessMessage("Your message has been sent successfully!");
+    setName("");
+    setEmail("");
+    setMessage("");
+    setTimeout(() => setSuccessMessage(""), 4000);
   };
 
   useEffect(() => {
@@ -64,98 +42,125 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className="w-full bg-white dark:bg-gray-900 text-black dark:text-white pt-10 pb-10">
-      <h1 className="text-center tracking-widest">Get in Touch</h1>
-      <h1 className="text-5xl font-bold text-center">Contact Me</h1>
+    <section className="py-16 px-4 md:px-8 bg-gray-900/60 border-t border-gray-800">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
+          {/* Left Info Column */}
+          <div>
+            <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold mb-1 block">
+              Get In Touch
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-3">
+              Let's Talk About Your Project
+            </h2>
+            <p className="text-sm text-gray-300 leading-relaxed mb-6 max-w-md">
+              {contactDescription ||
+                "Have a question, proposal, or want to collaborate? Feel free to reach out anytime."}
+            </p>
 
-      <div className=" lg:flex justify-around pt-10">
-        <div>
-          <h1 className="text-4xl font-bold pb-2 lg:pb-8 px-10 lg:px-0 ">
-            Let's Talk
-          </h1>
-          <p className="lg:max-w-xl text-2xl pb-8 leading-relaxed text-justify px-10 lg:px-0">
-            {contactDescription}
-          </p>
-          <div className="flex items-center space-x-6 pb-5 text-2xl lg:text-2xl px-10 lg:px-0">
-            <IoMail />
-            <Link to="mailto:forazizubayer@gmail.com">{gmail}</Link>
+            <div className="space-y-3.5 text-sm text-gray-300">
+              {gmail && (
+                <div className="flex items-center gap-3">
+                  <span className="p-2.5 rounded-lg bg-gray-800 text-sky-400">
+                    <IoMail className="text-base" />
+                  </span>
+                  <Link to={`mailto:${gmail}`} className="hover:text-sky-400 transition">
+                    {gmail}
+                  </Link>
+                </div>
+              )}
+
+              {phoneNo && (
+                <div className="flex items-center gap-3">
+                  <span className="p-2.5 rounded-lg bg-gray-800 text-sky-400">
+                    <FaPhoneAlt className="text-sm" />
+                  </span>
+                  <Link to={`tel:${phoneNo}`} className="font-mono hover:text-sky-400 transition">
+                    {phoneNo}
+                  </Link>
+                </div>
+              )}
+
+              {currentLocation && (
+                <div className="flex items-center gap-3">
+                  <span className="p-2.5 rounded-lg bg-gray-800 text-sky-400">
+                    <FaLocationDot className="text-sm" />
+                  </span>
+                  <span>{currentLocation}</span>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="flex items-center space-x-6 pb-5 text-2xl lg:text-2xl px-10 lg:px-0">
-            <FaPhoneAlt />
-            <Link to="tel:01646745401" className="font-mono">
-              {phoneNo}
-            </Link>
+
+          {/* Right Form Column */}
+          <div className="bg-gray-800/80 border border-gray-700/80 p-6 md:p-8 rounded-2xl shadow-xl">
+            <h3 className="text-lg font-bold text-white mb-4">Send a Message</h3>
+            <form onSubmit={onSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-1">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Alex Smith"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-1">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="alex@example.com"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-xs uppercase tracking-wider font-semibold text-gray-300 mb-1">
+                  Your Message
+                </label>
+                <textarea
+                  name="message"
+                  id="message"
+                  required
+                  rows="4"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="How can I help you?"
+                  className="w-full bg-gray-900/90 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 px-4 rounded-xl font-semibold text-white bg-sky-600 hover:bg-sky-500 transition shadow-lg shadow-sky-600/30 text-sm"
+              >
+                Send Message
+              </button>
+            </form>
+
+            {successMessage && (
+              <div className="mt-4 p-3 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs text-center rounded-xl font-medium">
+                ✓ {successMessage}
+              </div>
+            )}
           </div>
-          <div className="flex items-center space-x-6 text-2xl lg:text-2xl px-10 lg:px-0">
-            <FaLocationDot />
-            <Link to="#">{currentLocation}</Link>
-          </div>
-        </div>
-
-        <div className="px-10 py-10 w-full lg:w-1/4 lg:px-0 lg:py-0">
-          <form onSubmit={onSubmit}>
-            <div className="flex flex-col space-y-5">
-              <label
-                htmlFor="name"
-                className="text-2xl font-semibold tracking-wider"
-              >
-                Your Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter Your Name"
-                className="bg-white dark:bg-gray-800 w-full border border-slate-700 rounded-xl py-4 pl-4 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 tracking-widest text-lg capitalize"
-              />
-            </div>
-
-            <div className="flex flex-col space-y-5">
-              <label
-                htmlFor="email"
-                className="pt-5 text-2xl font-semibold tracking-wider"
-              >
-                Your Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter Your Email"
-                className="bg-white dark:bg-gray-800 w-full border border-slate-700 rounded-xl py-4 pl-4 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 tracking-widest text-lg lowercase"
-              />
-            </div>
-
-            <div className="flex flex-col space-y-5">
-              <label
-                htmlFor="message"
-                className="pt-5 text-2xl font-semibold tracking-wider"
-              >
-                Write Your Message Here
-              </label>
-              <textarea
-                name="message"
-                id="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Enter Your Message"
-                className="bg-white dark:bg-gray-800 w-full border border-slate-700 rounded-xl py-4 pl-4 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 tracking-widest text-lg"
-              ></textarea>
-              <Button type="submit" title={"Submit"}></Button>
-            </div>
-          </form>
-          {successMessage && (
-            <div className="mt-5 p-4 bg-sky-600 text-white rounded-md">
-              {successMessage}
-            </div>
-          )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

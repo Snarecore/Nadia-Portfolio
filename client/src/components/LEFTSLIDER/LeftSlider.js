@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../../api/apiClient";
-
-import { FaLinkedin } from "react-icons/fa";
-import { FaGithubSquare } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa6";
-import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
+import { FaFacebook, FaSquareXTwitter } from "react-icons/fa6";
 
 const LeftSlider = () => {
   const [facebookLink, setFacebookLink] = useState("");
@@ -26,24 +23,34 @@ const LeftSlider = () => {
       })
       .catch((err) => console.error("Error fetching intro in LeftSlider:", err));
   }, []);
+
+  const hasAnyLink = facebookLink || twitterLink || githubLink || linkedinLink;
+  if (!hasAnyLink) return null;
+
   return (
-    <div className="static sm:fixed left-0 bottom-0 px-2">
-      <div className="flex flex-col items-center">
-        <div className="flex flex-row pt-10 sm:flex-col gap-3">
-          <Link to={linkedinLink} target="_blank">
-            <FaLinkedin className="text-gray-600 text-2xl cursor-pointer hover:text-white" />
+    <div className="static sm:fixed left-4 bottom-0 z-40 hidden sm:block">
+      <div className="flex flex-col items-center gap-3">
+        {linkedinLink && (
+          <Link to={linkedinLink} target="_blank" className="text-gray-400 hover:text-sky-400 text-lg transition">
+            <FaLinkedin />
           </Link>
-          <Link to={facebookLink} target="_blank">
-            <FaFacebook className="text-gray-600 text-2xl cursor-pointer hover:text-white" />
+        )}
+        {facebookLink && (
+          <Link to={facebookLink} target="_blank" className="text-gray-400 hover:text-sky-400 text-lg transition">
+            <FaFacebook />
           </Link>
-          <Link to={githubLink} target="_blank">
-            <FaGithubSquare className="text-gray-600 text-2xl cursor-pointer hover:text-white" />
+        )}
+        {githubLink && (
+          <Link to={githubLink} target="_blank" className="text-gray-400 hover:text-sky-400 text-lg transition">
+            <FaGithubSquare />
           </Link>
-          <Link to={twitterLink} target="_blank">
-            <FaSquareXTwitter className="text-gray-600 text-2xl cursor-pointer hover:text-white" />
+        )}
+        {twitterLink && (
+          <Link to={twitterLink} target="_blank" className="text-gray-400 hover:text-sky-400 text-lg transition">
+            <FaSquareXTwitter />
           </Link>
-        </div>
-        <div className=" w-[1px] h-32 bg-[#125f63] hidden sm:block"></div>
+        )}
+        <div className="w-[1px] h-16 bg-gray-700/80 mt-1"></div>
       </div>
     </div>
   );

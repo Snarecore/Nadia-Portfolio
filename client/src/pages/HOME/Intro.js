@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
-
-// import profile from "../../assets/profile-pic.png";
-// import CV from "../../assets/CV/Zubayer Farazi.pdf";
 import ProjectsInfo from "../../components/PROJECTSINFO/Projects";
 import API from "../../api/apiClient";
 
@@ -37,75 +34,98 @@ const Intro = () => {
         console.error("There was an error fetching the data!", error);
       });
   }, []);
-  return (
-    <div>
-      <div className="pt-14 md:pt-20 px-5 md:px-10 text-center md:text-justify flex flex-col-reverse items-center justify-around md:flex-row space-y-10 md:space-y-0 md:space-x-10">
-        <div className="leading-10 py-10">
-          <h1 className="text-xl">As-salamu Alaikum</h1>
-          <h1 className="text-5xl md:text-7xl">Hello, I'm</h1>
-          <h1 className="text-5xl md:text-8xl text-sky-600 font-bold">
-            {name}
-          </h1>
-          <p className="text-xl max-w-2xl md:text-2xl pt-10 tracking-wide font-playwrite">
-            {paragraph}
-          </p>
-          {/* <p className="text-xl md:text-2xl tracking-wide font-playwrite leading-loose">
-            I am proficient in various programming languages and technologies.
-          </p> */}
 
-          <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 space-x-0 md:space-x-10 items-center pt-10">
-            <a
-              href={CV}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-2 px-4 py-2 rounded-md border-sky-600 hover:bg-sky-600 hover:text-white transition-all ease-in-out delay-150 flex items-center gap-2 uppercase tracking-wider text-sky-600"
-              download
-            >
-              Download CV
-              <span>
-                <MdOutlineFileDownload className="text-xl"></MdOutlineFileDownload>
-              </span>
-            </a>
-            <div className="flex space-x-5 ">
-              <Link
-                to={githubLink}
+  return (
+    <section className="pt-24 md:pt-32 pb-10 px-4 md:px-8 max-w-6xl mx-auto">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
+        <div className="flex-1 text-center md:text-left">
+          <span className="inline-block text-xs uppercase tracking-widest text-sky-400 font-semibold mb-2">
+            As-salamu Alaikum
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Hello, I'm
+          </h2>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-sky-500 tracking-tight mt-1 mb-4">
+            {name || "Your Name"}
+          </h1>
+          <p className="text-sm md:text-base text-gray-300 max-w-xl leading-relaxed mb-6 mx-auto md:mx-0">
+            {paragraph || "Full stack web developer passionate about crafting robust, scalable digital experiences."}
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+            {CV ? (
+              <a
+                href={CV}
                 target="_blank"
-                className="text-black dark:text-white text-4xl hover:text-gray-600"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-5 py-2.5 rounded-lg transition duration-200"
+                download
               >
-                <FaGithub />
-              </Link>
-              <Link
-                to={linkedInLink}
-                target="_blank"
-                className="text-black dark:text-white text-4xl hover:text-gray-600"
-              >
-                <FaLinkedin />
-              </Link>
-              <Link
-                to={facebookLink}
-                target="_blank"
-                className="text-black dark:text-white text-4xl hover:text-gray-600"
-              >
-                <FaFacebook />
-              </Link>
-              <Link
-                to={twitterLink}
-                target="_blank"
-                className="text-black dark:text-white text-4xl hover:text-gray-600"
-              >
-                <FaTwitter />
-              </Link>
+                Download CV
+                <MdOutlineFileDownload className="text-lg" />
+              </a>
+            ) : null}
+
+            <div className="flex items-center space-x-3 text-lg text-gray-400">
+              {githubLink && (
+                <Link
+                  to={githubLink}
+                  target="_blank"
+                  className="p-2 rounded-lg bg-gray-800/80 hover:text-white hover:bg-gray-700 transition"
+                  aria-label="GitHub"
+                >
+                  <FaGithub />
+                </Link>
+              )}
+              {linkedInLink && (
+                <Link
+                  to={linkedInLink}
+                  target="_blank"
+                  className="p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin />
+                </Link>
+              )}
+              {facebookLink && (
+                <Link
+                  to={facebookLink}
+                  target="_blank"
+                  className="p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
+                  aria-label="Facebook"
+                >
+                  <FaFacebook />
+                </Link>
+              )}
+              {twitterLink && (
+                <Link
+                  to={twitterLink}
+                  target="_blank"
+                  className="p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
+                  aria-label="Twitter"
+                >
+                  <FaTwitter />
+                </Link>
+              )}
             </div>
           </div>
         </div>
-        <img
-          src={profileImg}
-          alt="Profile"
-          className="rounded-full w-48 md:w-64 lg:w-80"
-        />
+
+        {profileImg && (
+          <div className="flex-shrink-0">
+            <img
+              src={profileImg}
+              alt={name || "Profile"}
+              className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 object-cover rounded-full ring-4 ring-sky-500/20 shadow-2xl"
+            />
+          </div>
+        )}
       </div>
-      <ProjectsInfo></ProjectsInfo>
-    </div>
+
+      <div className="mt-12 pt-8 border-t border-gray-800/80">
+        <ProjectsInfo />
+      </div>
+    </section>
   );
 };
 

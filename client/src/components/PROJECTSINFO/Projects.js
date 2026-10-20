@@ -22,32 +22,27 @@ const ProjectsInfo = () => {
         console.error("There was an error fetching the data!", error);
       });
   }, []);
+
+  const stats = [
+    { value: noOfExperience, label: "Years of Experience" },
+    { value: noOfProjectCompleted, label: "Projects Completed" },
+    { value: noOfTechnology, label: "Technologies Mastered" },
+    { value: noOfCodeCommits, label: "Code Commits" },
+  ];
+
   return (
-    <div className="grid grid-cols-2 justify-items-center gap-y-4  md:flex shrink justify-around pb-10">
-      <div className="flex flex-row gap-3 items-center">
-        <h1 className="text-6xl font-mono font-bold">{noOfExperience}</h1>
-        <p className="text-xl">
-          Years of <br /> experience
-        </p>
-      </div>
-      <div className="flex flex-row gap-3 items-center">
-        <h1 className="text-6xl font-mono font-bold">{noOfProjectCompleted}</h1>
-        <p className="text-xl">
-          Projects <br /> completed
-        </p>
-      </div>
-      <div className="flex flex-row gap-3 items-center">
-        <h1 className="text-6xl font-mono font-bold">{noOfTechnology}</h1>
-        <p className="text-xl">
-          Technologies <br /> mastered
-        </p>
-      </div>
-      <div className="flex flex-row gap-3 items-center">
-        <h1 className="text-6xl font-mono font-bold">{noOfCodeCommits}</h1>
-        <p className="text-xl">
-          Code <br /> commits
-        </p>
-      </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 max-w-5xl mx-auto">
+      {stats.map((stat, idx) => (
+        <div key={idx} className="flex items-center gap-3">
+          <span className="text-3xl md:text-4xl font-extrabold font-mono text-sky-400">
+            {stat.value || 0}
+          </span>
+          <p className="text-xs uppercase tracking-wider text-gray-400 font-medium leading-tight">
+            {stat.label.split(" ").slice(0, 1).join(" ")} <br />
+            {stat.label.split(" ").slice(1).join(" ")}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };

@@ -5,102 +5,114 @@ import { useParams } from "react-router-dom";
 
 const About = () => {
   const { id } = useParams();
-  const [visibleSection, setVisibleSection] = useState("education");
+  const [visibleSection, setVisibleSection] = useState("skills");
   const [aboutInfo, setAboutInfo] = useState({});
   const [error, setError] = useState(null);
-
-  const showExperience = () => setVisibleSection("experience");
-  const showEducation = () => setVisibleSection("education");
-  const showSkills = () => setVisibleSection("skills");
 
   useEffect(() => {
     API.get("/about")
       .then((res) => {
         setAboutInfo(res.data?.data?.[0] || {});
       })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-        setError("There was an error fetching the data!");
+      .catch((err) => {
+        console.error("Error fetching about info:", err);
+        setError("Could not load about information.");
       });
   }, [id]);
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 text-black dark:text-white pt-10 pb-10">
-      <div className="flex flex-col md:flex-row justify-around items-center px-5 md:px-10 space-y-2 md:space-y-0 md:space-x-10">
-        <div>
-          <img
-            src={aboutInfo?.aboutImage || "default-image-path"} // Fallback for image
-            alt="Profile"
-            className="w-48 md:w-64 lg:w-80"
-          />
-        </div>
-        <div className="text-lg text-justify md:text-xl leading-8 max-w-4xl md:max-w-5xl">
-          <h1 className="text-5xl font-bold border-b leading-relaxed text-center md:text-left">
+    <section className="py-16 px-4 md:px-8 bg-gray-900/60 border-t border-gray-800">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+        {aboutInfo?.aboutImage && (
+          <div className="flex-shrink-0">
+            <img
+              src={aboutInfo.aboutImage}
+              alt={aboutInfo.aboutDesignation || "About"}
+              className="w-52 sm:w-64 md:w-72 object-cover rounded-2xl border border-gray-700/80 shadow-2xl"
+            />
+          </div>
+        )}
+
+        <div className="flex-1 text-center md:text-left">
+          <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold mb-1 block">
             About Me
-          </h1>
-          <h1 className="py-2 text-center md:text-left">
-            {aboutInfo?.aboutDesignation || "Designation"}
-          </h1>
-          <p className="py-4">
-            {aboutInfo?.aboutParagraph || "About paragraph goes here."}
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+            {aboutInfo?.aboutDesignation || "Full-Stack Software Engineer"}
+          </h2>
+          <p className="text-sm text-gray-300 leading-relaxed max-w-2xl mb-8 mx-auto md:mx-0">
+            {aboutInfo?.aboutParagraph ||
+              "I am passionate about creating clean, scalable web applications with great user experience."}
           </p>
-          <div className="flex justify-around">
-            <div>
-              <h1 className="font-bold cursor-pointer" onClick={showSkills}>
-                Skills
-              </h1>
-              {visibleSection === "skills" && (
-                <ul className="pt-4">
-                  <li className="font-semibold text-sky-600 inline-flex items-center gap-2">
-                    <FaArrowRight /> UI/UX
-                  </li>
-                  <p>Designing Web</p>
-                  <li className="font-semibold text-sky-600 inline-flex items-center gap-2 pt-4">
-                    <FaArrowRight /> Web Development
-                  </li>
-                  <p>Web App Development</p>
-                  <li className="font-semibold text-sky-600 inline-flex items-center gap-2 pt-4">
-                    <FaArrowRight /> Programming Languages
-                  </li>
-                  <p>C, Java, JavaScript, React</p>
-                  <li className="font-semibold text-sky-600 inline-flex items-center gap-2 pt-4">
-                    <FaArrowRight /> Databases
-                  </li>
-                  <p>SQL, MongoDB</p>
-                </ul>
-              )}
-            </div>
-            <div>
-              <h1 className="font-bold cursor-pointer" onClick={showExperience}>
-                Experience
-              </h1>
-              {visibleSection === "experience" && (
-                <ul className="pt-4">
-                  <li className="font-semibold text-sky-600 inline-flex items-center gap-2">
-                    <FaArrowRight /> Internship at
-                  </li>
-                  <p>TechnoArt Software (TAS)</p>
-                </ul>
-              )}
-            </div>
-            <div>
-              <h1 className="font-bold cursor-pointer" onClick={showEducation}>
-                Education
-              </h1>
-              {visibleSection === "education" && (
-                <ul className="pt-4">
-                  <li className="font-semibold text-sky-600 inline-flex items-center gap-2">
-                    <FaArrowRight /> B.Sc in CSE
-                  </li>
-                  <p>Notre Dame University Bangladesh</p>
-                </ul>
-              )}
-            </div>
+
+          {/* Interactive Tab Pills */}
+          <div className="flex justify-center md:justify-start gap-2 mb-6 border-b border-gray-800 pb-3">
+            {[
+              { id: "skills", label: "Skills" },
+              { id: "experience", label: "Experience" },
+              { id: "education", label: "Education" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setVisibleSection(tab.id)}
+                className={`text-xs uppercase tracking-wider font-semibold px-4 py-2 rounded-lg transition ${
+                  visibleSection === tab.id
+                    ? "bg-sky-600 text-white shadow-md shadow-sky-600/30"
+                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Contents */}
+          <div className="text-sm text-gray-300 max-w-xl mx-auto md:mx-0">
+            {visibleSection === "skills" && (
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <li className="flex items-center gap-2 text-white font-medium">
+                  <FaArrowRight className="text-sky-400 text-xs flex-shrink-0" />
+                  <span>UI/UX & Web Design</span>
+                </li>
+                <li className="flex items-center gap-2 text-white font-medium">
+                  <FaArrowRight className="text-sky-400 text-xs flex-shrink-0" />
+                  <span>React.js & Modern Frontend</span>
+                </li>
+                <li className="flex items-center gap-2 text-white font-medium">
+                  <FaArrowRight className="text-sky-400 text-xs flex-shrink-0" />
+                  <span>Node.js & Express APIs</span>
+                </li>
+                <li className="flex items-center gap-2 text-white font-medium">
+                  <FaArrowRight className="text-sky-400 text-xs flex-shrink-0" />
+                  <span>MongoDB & Database Architecture</span>
+                </li>
+              </ul>
+            )}
+
+            {visibleSection === "experience" && (
+              <div className="space-y-3">
+                <div className="border-l-2 border-sky-500 pl-3">
+                  <h4 className="font-semibold text-white">Full Stack Intern / Developer</h4>
+                  <p className="text-xs text-sky-400">Software & Web Development</p>
+                  <p className="text-xs text-gray-400 mt-1">Worked on client websites and internal products.</p>
+                </div>
+              </div>
+            )}
+
+            {visibleSection === "education" && (
+              <div className="space-y-3">
+                <div className="border-l-2 border-sky-500 pl-3">
+                  <h4 className="font-semibold text-white">B.Sc. in Computer Science & Engineering</h4>
+                  <p className="text-xs text-sky-400">Undergraduate Degree</p>
+                  <p className="text-xs text-gray-400 mt-1">Focused on software engineering, web algorithms and data structures.</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      {error && <div className="text-red-500 text-center mt-4">{error}</div>}
-    </div>
+      {error && <div className="text-xs text-red-400 text-center mt-4">{error}</div>}
+    </section>
   );
 };
 

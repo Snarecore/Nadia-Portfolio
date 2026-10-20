@@ -1,22 +1,26 @@
 import React from "react";
-import Button from "../BUTTON/Button";
 
 const Card = ({ image, title, paragraph }) => {
   return (
-    <div className=" px-5 py-2 md:px-10">
-      <div className="bg-white dark:bg-gray-800 max-w-sm lg:max-w-lg p-5 rounded-lg shadow-md ">
-        <div className="flex justify-center items-center h-full">
-          <img src={image} alt="" className="w-64" />
-        </div>
-        <div>
-          <h1 className="text-4xl font-bold text-center p-5 tracking-wider text-sky-600">
-            {title}
-          </h1>
-          <p className="text-lg text-justify pb-5">{paragraph}</p>
-        </div>
-        <div className="flex items-center justify-center">
-          <Button title={"Let's Talk"}></Button>
-        </div>
+    <div className="bg-gray-800/80 border border-gray-700/70 p-6 rounded-2xl shadow-lg hover:border-sky-500/50 hover:shadow-sky-500/10 hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between text-center group">
+      <div>
+        {image && (
+          <div className="w-14 h-14 mx-auto mb-4 p-2.5 rounded-xl bg-gray-700/50 flex items-center justify-center">
+            <img src={image} alt={title || "Service"} className="w-full h-full object-contain" />
+          </div>
+        )}
+        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-sky-400 transition">
+          {title}
+        </h3>
+        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+          {paragraph}
+        </p>
+      </div>
+
+      <div className="pt-2">
+        <span className="inline-block text-xs uppercase tracking-wider font-semibold text-sky-400 border border-sky-500/40 px-3 py-1.5 rounded-lg group-hover:bg-sky-600 group-hover:text-white transition">
+          Learn More
+        </span>
       </div>
     </div>
   );
