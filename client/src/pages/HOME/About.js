@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import API from "../../api/apiClient";
-import { useParams } from "react-router-dom";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const About = () => {
-  const { id } = useParams();
   const [visibleSection, setVisibleSection] = useState("skills");
-  const [aboutInfo, setAboutInfo] = useState({});
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    API.get("/about")
-      .then((res) => {
-        setAboutInfo(res.data?.data?.[0] || {});
-      })
-      .catch((err) => {
-        console.error("Error fetching about info:", err);
-        setError("Could not load about information.");
-      });
-  }, [id]);
+  const { about } = usePortfolio();
+  const aboutInfo = about || {};
 
   return (
     <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800">
@@ -111,7 +98,6 @@ const About = () => {
           </div>
         </div>
       </div>
-      {error && <div className="text-xs text-red-400 text-center mt-3">{error}</div>}
     </section>
   );
 };

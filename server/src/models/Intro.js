@@ -4,36 +4,36 @@ const introSchema = new Schema(
   {
     profileImage: {
       type: String,
-      required: true,
+      default: "",
     },
     cv: {
       type: String,
-      required: true,
+      default: "",
     },
     name: {
       type: String,
       trim: true,
-      required: true,
+      default: "",
     },
     paragraph: {
       type: String,
-      required: true,
+      default: "",
     },
     githubLink: {
       type: String,
-      required: true,
+      default: "",
     },
     linkedInLink: {
       type: String,
-      required: true,
+      default: "",
     },
     facebookLink: {
       type: String,
-      required: true,
+      default: "",
     },
     twitterLink: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   { timestamps: true }

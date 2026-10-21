@@ -14,7 +14,10 @@ const comparePassword = (password, storedHash) => {
   if (!storedHash || !storedHash.includes(":")) return false;
   const [salt, originalHash] = storedHash.split(":");
   const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, "sha512").toString("hex");
-  return hash === originalHash;
+  const hashBuf = Buffer.from(hash);
+  const originalBuf = Buffer.from(originalHash);
+  if (hashBuf.length !== originalBuf.length) return false;
+  return crypto.timingSafeEqual(hashBuf, originalBuf);
 };
 
 // Create a signed token with expiration
@@ -42,7 +45,11 @@ const verifyToken = (token) => {
       .update(`${header}.${body}`)
       .digest("base64url");
 
-    if (signature !== expectedSig) return null;
+    const sigBuf = Buffer.from(signature);
+    const expectedSigBuf = Buffer.from(expectedSig);
+    if (sigBuf.length !== expectedSigBuf.length || !crypto.timingSafeEqual(sigBuf, expectedSigBuf)) {
+      return null;
+    }
 
     const payload = JSON.parse(Buffer.from(body, "base64url").toString("utf8"));
     if (payload.exp && Math.floor(Date.now() / 1000) > payload.exp) {

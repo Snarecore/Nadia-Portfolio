@@ -4,7 +4,7 @@ const serviceSchema = new Schema(
   {
     serviceParagraph: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   { timestamps: true }

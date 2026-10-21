@@ -20,10 +20,12 @@ import EditProjectInfo from "./pages/ADMIN/EditProjectInfo";
 import EditAbout from "./pages/ADMIN/EditAbout";
 import AdminLogin from "./pages/ADMIN/AdminLogin";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { PortfolioProvider } from "./context/PortfolioContext";
 
 function App() {
   return (
-    <Router>
+    <PortfolioProvider>
+      <Router>
       {/* <Navbar></Navbar> */}
       <Routes>
         {/* <Route path="/" element={<Home></Home>}></Route> */}
@@ -129,7 +131,8 @@ function App() {
         <Route path="/*" element={<Error></Error>}></Route>
       </Routes>
     </Router>
-  );
+  </PortfolioProvider>
+);
 }
 
 export default App;

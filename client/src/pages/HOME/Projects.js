@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Slider from "../../components/SLIDER/Slider";
-import API from "../../api/apiClient";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const Projects = () => {
-  const [liveProjects, setLiveProjects] = useState([]);
-
-  useEffect(() => {
-    API.get("/liveProject")
-      .then((res) => {
-        setLiveProjects(res.data?.data || []);
-      })
-      .catch((error) => {
-        console.error("Error fetching projects:", error);
-      });
-  }, []);
+  const { liveProjects } = usePortfolio();
 
   return (
     <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800">

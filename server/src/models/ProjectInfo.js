@@ -4,19 +4,19 @@ const projectInfoSchema = new Schema(
   {
     noOfExperience: {
       type: Number,
-      required: true,
+      default: 0,
     },
     noOfProjectCompleted: {
       type: Number,
-      required: true,
+      default: 0,
     },
     noOfTechnology: {
       type: Number,
-      required: true,
+      default: 0,
     },
     noOfCodeCommits: {
       type: Number,
-      required: true,
+      default: 0,
     },
   },
   { timestamps: true }

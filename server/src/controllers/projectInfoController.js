@@ -32,7 +32,13 @@ const getProjectInfoControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const projectInfoData = await projectInfo.findById(id);
-    return res.status(200).send(projectInfoData);
+    if (!projectInfoData) {
+      return next(createError(404, "Project Information not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: projectInfoData,
+    });
   } catch (error) {
     next(error);
   }
@@ -46,13 +52,16 @@ const putProjectInfoControllerByID = async (req, res, next) => {
       req.body,
       {
         new: true,
-        runValidator: true,
+        runValidators: true,
       }
     );
     if (!updateProjectInfo) {
       return next(createError(404, "Project Information not found"));
     }
-    return res.status(200).send(updateProjectInfo);
+    return res.status(200).json({
+      success: true,
+      data: updateProjectInfo,
+    });
   } catch (error) {
     next(error);
   }
@@ -62,7 +71,11 @@ const deleteProjectInfoControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const updateProjectInfo = await projectInfo.findByIdAndDelete(id);
+    if (!updateProjectInfo) {
+      return next(createError(404, "Project Information not found"));
+    }
     return res.status(200).json({
+      success: true,
       message: "Deleted Successfully",
     });
   } catch (error) {

@@ -31,7 +31,13 @@ const getServiceCardControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const newServiceCard = await serviceCardInfo.findById(id);
-    return res.status(200).send(newServiceCard);
+    if (!newServiceCard) {
+      return next(createError(404, "Service Card not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: newServiceCard,
+    });
   } catch (error) {
     next(error);
   }
@@ -45,13 +51,16 @@ const putServiceCardControllerByID = async (req, res, next) => {
       req.body,
       {
         new: true,
-        runValidator: true,
+        runValidators: true,
       }
     );
     if (!updateServiceCard) {
-      return next(createError(404, "Project Information not found"));
+      return next(createError(404, "Service Card not found"));
     }
-    return res.status(200).send(updateServiceCard);
+    return res.status(200).json({
+      success: true,
+      data: updateServiceCard,
+    });
   } catch (error) {
     next(error);
   }
@@ -61,8 +70,12 @@ const deleteServiceCardControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const newServiceCard = await serviceCardInfo.findByIdAndDelete(id);
+    if (!newServiceCard) {
+      return next(createError(404, "Service Card not found"));
+    }
     return res.status(200).json({
-      message: "deleted successfully",
+      success: true,
+      message: "Deleted successfully",
     });
   } catch (error) {
     next(error);

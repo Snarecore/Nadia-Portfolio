@@ -31,7 +31,13 @@ const getAboutControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const aboutData = await aboutInfo.findById(id);
-    return res.status(200).send(aboutData);
+    if (!aboutData) {
+      return next(createError(404, "About Information not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: aboutData,
+    });
   } catch (error) {
     next(error);
   }
@@ -42,12 +48,15 @@ const putAboutControllerByID = async (req, res, next) => {
     const id = req.params.id;
     const updateAbout = await aboutInfo.findByIdAndUpdate(id, req.body, {
       new: true,
-      runValidator: true,
+      runValidators: true,
     });
     if (!updateAbout) {
-      return next(createError(404, "Project Information not found"));
+      return next(createError(404, "About Information not found"));
     }
-    return res.status(200).send(updateAbout);
+    return res.status(200).json({
+      success: true,
+      data: updateAbout,
+    });
   } catch (error) {
     next(error);
   }
@@ -57,7 +66,11 @@ const deleteAboutControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const aboutData = await aboutInfo.findByIdAndDelete(id);
+    if (!aboutData) {
+      return next(createError(404, "About Information not found"));
+    }
     return res.status(200).json({
+      success: true,
       message: "Deleted successfully",
     });
   } catch (error) {

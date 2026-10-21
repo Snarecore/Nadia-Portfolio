@@ -16,10 +16,11 @@ const connectDB = async (options = {}) => {
     console.log("Database is connected successfully");
 
     mongoose.connection.on("error", (err) => {
-      console.error("DB Connection error", err);
+      console.error("DB connection error:", err.message || err);
     });
   } catch (error) {
-    console.log("DB is not connected", error.toString());
+    console.error("DB connection error:", error.toString());
+    throw error;
   }
 };
 

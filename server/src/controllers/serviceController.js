@@ -29,7 +29,13 @@ const getServiceControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const newServiceData = await serviceInfo.findById(id);
-    return res.status(200).send(newServiceData);
+    if (!newServiceData) {
+      return next(createError(404, "Service not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: newServiceData,
+    });
   } catch (error) {
     next(error);
   }
@@ -43,9 +49,12 @@ const putServiceControllerByID = async (req, res, next) => {
       runValidators: true,
     });
     if (!updatedService) {
-      return next(createError(404, "Intro not found"));
+      return next(createError(404, "Service not found"));
     }
-    return res.status(200).send(updatedService);
+    return res.status(200).json({
+      success: true,
+      data: updatedService,
+    });
   } catch (error) {
     next(error);
   }
@@ -55,7 +64,11 @@ const deleteServiceControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const newServiceData = await serviceInfo.findByIdAndDelete(id);
+    if (!newServiceData) {
+      return next(createError(404, "Service not found"));
+    }
     return res.status(200).json({
+      success: true,
       message: "Deleted Successfully",
     });
   } catch (error) {

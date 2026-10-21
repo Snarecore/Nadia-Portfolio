@@ -4,27 +4,27 @@ const projectSchema = new Schema(
   {
     projectImage: {
       type: String,
-      required: true,
+      default: "",
     },
     projectNo: {
       type: String,
-      required: true,
+      default: "",
     },
     projectTitle: {
       type: String,
-      required: true,
+      default: "",
     },
     projectParagraph: {
       type: String,
-      required: true,
+      default: "",
     },
     projectLiveLink: {
       type: String,
-      required: true,
+      default: "",
     },
     projectGithubLink: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   { timestamps: true }

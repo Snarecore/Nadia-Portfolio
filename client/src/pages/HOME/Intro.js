@@ -1,39 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
 import ProjectsInfo from "../../components/PROJECTSINFO/Projects";
-import API from "../../api/apiClient";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const Intro = () => {
-  const [profileImg, setProfileImg] = useState("");
-  const [CV, setCV] = useState("");
-  const [name, setName] = useState("");
-  const [paragraph, setParagraph] = useState("");
-  const [githubLink, setGithubLink] = useState("");
-  const [linkedInLink, setLinkedInLink] = useState("");
-  const [facebookLink, setFacebookLink] = useState("");
-  const [twitterLink, setTwitterLink] = useState("");
+  const { intro } = usePortfolio();
 
-  useEffect(() => {
-    API.get("/intro")
-      .then((res) => {
-        const intro = res.data?.data?.[0];
-        if (intro) {
-          setProfileImg(intro.profileImage || "");
-          setCV(intro.cv || "");
-          setName(intro.name || "");
-          setParagraph(intro.paragraph || "");
-          setGithubLink(intro.githubLink || "");
-          setLinkedInLink(intro.linkedInLink || "");
-          setFacebookLink(intro.facebookLink || "");
-          setTwitterLink(intro.twitterLink || "");
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
-  }, []);
+  const profileImg = intro?.profileImage || "";
+  const CV = intro?.cv || "";
+  const name = intro?.name || "";
+  const paragraph = intro?.paragraph || "";
+  const githubLink = intro?.githubLink || "";
+  const linkedInLink = intro?.linkedInLink || "";
+  const facebookLink = intro?.facebookLink || "";
+  const twitterLink = intro?.twitterLink || "";
 
   return (
     <section className="pt-20 sm:pt-24 md:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">

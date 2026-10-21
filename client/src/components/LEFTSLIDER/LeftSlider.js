@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import API from "../../api/apiClient";
 import { FaLinkedin, FaGithubSquare } from "react-icons/fa";
 import { FaFacebook, FaSquareXTwitter } from "react-icons/fa6";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const LeftSlider = () => {
-  const [facebookLink, setFacebookLink] = useState("");
-  const [twitterLink, setTwitterLink] = useState("");
-  const [githubLink, setGithubLink] = useState("");
-  const [linkedinLink, setLinkedinLink] = useState("");
+  const { intro } = usePortfolio();
 
-  useEffect(() => {
-    API.get("/intro")
-      .then((res) => {
-        const sliderInfo = res.data?.data?.[0];
-        if (sliderInfo) {
-          setFacebookLink(sliderInfo.facebookLink || "");
-          setTwitterLink(sliderInfo.twitterLink || "");
-          setGithubLink(sliderInfo.githubLink || "");
-          setLinkedinLink(sliderInfo.linkedInLink || "");
-        }
-      })
-      .catch((err) => console.error("Error fetching intro in LeftSlider:", err));
-  }, []);
+  const facebookLink = intro?.facebookLink || "";
+  const twitterLink = intro?.twitterLink || "";
+  const githubLink = intro?.githubLink || "";
+  const linkedinLink = intro?.linkedInLink || "";
 
   const hasAnyLink = facebookLink || twitterLink || githubLink || linkedinLink;
   if (!hasAnyLink) return null;

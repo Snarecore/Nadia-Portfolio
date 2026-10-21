@@ -1,0 +1,22 @@
+{
+  "name": "mern-portfolio-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full Stack MERN Portfolio with CMS Dashboard",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix client start",
+    "build": "npm --prefix client run build",
+    "install:all": "npm --prefix server install && npm --prefix client install"
+  },
+  "keywords": [
+    "mern",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "portfolio"
+  ],
+  "author": "Zubayer Farazi",
+  "license": "ISC"
+}

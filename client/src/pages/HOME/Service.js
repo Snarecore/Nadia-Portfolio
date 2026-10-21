@@ -1,32 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "../../components/CARD/Card";
-import API from "../../api/apiClient";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const Service = () => {
-  const [serviceDescription, setServiceDescription] = useState(null);
-  const [cardInfo, setCardInfo] = useState([]);
-
-  useEffect(() => {
-    API.get("/service")
-      .then((res) => {
-        setServiceDescription(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching service description:", error);
-      });
-  }, []);
-
-  useEffect(() => {
-    API.get("/serviceCard")
-      .then((res) => {
-        setCardInfo(res.data?.data || []);
-      })
-      .catch((error) => {
-        console.error("Error fetching service cards:", error);
-      });
-  }, []);
-
-  const paragraph = serviceDescription?.data?.[0]?.serviceParagraph;
+  const { service, serviceCards } = usePortfolio();
+  const paragraph = service?.serviceParagraph || "";
+  const cardInfo = serviceCards || [];
 
   return (
     <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">

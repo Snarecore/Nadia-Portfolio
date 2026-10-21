@@ -32,7 +32,13 @@ const getContactControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const newContactData = await contactInfo.findById(id);
-    return res.status(200).send(newContactData);
+    if (!newContactData) {
+      return next(createError(404, "Contact Information not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: newContactData,
+    });
   } catch (error) {
     next(error);
   }
@@ -43,12 +49,15 @@ const updateContactControllerByID = async (req, res, next) => {
     const id = req.params.id;
     const updateContact = await contactInfo.findByIdAndUpdate(id, req.body, {
       new: true,
-      runValidator: true,
+      runValidators: true,
     });
     if (!updateContact) {
-      return next(createError(404, "Project Information not found"));
+      return next(createError(404, "Contact Information not found"));
     }
-    return res.status(200).send(updateContact);
+    return res.status(200).json({
+      success: true,
+      data: updateContact,
+    });
   } catch (error) {
     next(error);
   }
@@ -58,7 +67,11 @@ const deleteContactControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const newContactData = await contactInfo.findByIdAndDelete(id);
+    if (!newContactData) {
+      return next(createError(404, "Contact Information not found"));
+    }
     return res.status(200).json({
+      success: true,
       message: "Deleted Successfully",
     });
   } catch (error) {

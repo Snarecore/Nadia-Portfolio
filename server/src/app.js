@@ -16,15 +16,65 @@ const authRouter = require("./routes/authRoute");
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
-  standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
-  // store: ... , // Redis, Memcached, etc. See below.
+// Disable information disclosure
+app.disable("x-powered-by");
+
+// Standard Security Headers (OWASP recommendations)
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  next();
 });
 
-app.use(cors());
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100, // Limit each IP to 100 requests per window
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+});
+
+// Configured CORS (Supports dynamic localhost ports in dev and HTTPS Vercel/Netlify in production)
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:3002",
+  "http://localhost:5173",
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // 1. Allow mobile apps, curl, or server-to-server requests (no origin header)
+      if (!origin) return callback(null, true);
+
+      // 2. Allow any local development port (http://localhost:3000, 3001, etc.)
+      if (/^http:\/\/localhost(:\d+)?$/.test(origin)) {
+        return callback(null, true);
+      }
+
+      // 3. Allow Vercel and Netlify live preview & production domains (HTTPS)
+      if (
+        /^https:\/\/.*\.vercel\.app$/.test(origin) ||
+        /^https:\/\/.*\.netlify\.app$/.test(origin)
+      ) {
+        return callback(null, true);
+      }
+
+      // 4. Allow configured production client URL or wildcard
+      if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+        return callback(null, true);
+      }
+
+      // 5. Permissive fallback to prevent breaking any live production deployment
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
+
 app.use(morgan("dev"));
 app.use(xssClean());
 app.use(limiter);
@@ -56,10 +106,29 @@ app.get("/test", (req, res) => {
 app.use((req, res, next) => {
   next(createError(404, "Route is not found"));
 });
+
+// Centralized Error Handler
 app.use((err, req, res, next) => {
-  return res.status(err.status || 500).json({
+  let statusCode = err.status || 500;
+  let message = err.message || "Internal Server Error";
+
+  // Mongoose Bad ObjectId CastError
+  if (err.name === "CastError") {
+    statusCode = 400;
+    message = `Invalid ${err.path || "ID"}: ${err.value}`;
+  }
+
+  // Mongoose Schema Validation Error
+  if (err.name === "ValidationError") {
+    statusCode = 400;
+    message = Object.values(err.errors)
+      .map((e) => e.message)
+      .join(", ");
+  }
+
+  return res.status(statusCode).json({
     success: false,
-    message: err.message,
+    message,
   });
 });
 

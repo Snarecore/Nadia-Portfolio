@@ -4,15 +4,15 @@ const serviceCardSchema = new Schema(
   {
     cardImage: {
       type: String,
-      required: true,
+      default: "",
     },
     cardHeader: {
       type: String,
-      required: true,
+      default: "",
     },
     cardParagraph: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   { timestamps: true }

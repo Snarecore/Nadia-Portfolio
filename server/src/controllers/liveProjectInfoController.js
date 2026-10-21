@@ -34,7 +34,13 @@ const getLiveProjectControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const liveProjects = await liveProjectInfo.findById(id);
-    return res.status(200).send(liveProjects);
+    if (!liveProjects) {
+      return next(createError(404, "Project Information not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: liveProjects,
+    });
   } catch (error) {
     next(error);
   }
@@ -48,13 +54,16 @@ const putLiveProjectControllerByID = async (req, res, next) => {
       req.body,
       {
         new: true,
-        runValidator: true,
+        runValidators: true,
       }
     );
     if (!updateLiveProject) {
       return next(createError(404, "Project Information not found"));
     }
-    return res.status(200).send(updateLiveProject);
+    return res.status(200).json({
+      success: true,
+      data: updateLiveProject,
+    });
   } catch (error) {
     next(error);
   }
@@ -64,7 +73,11 @@ const deleteLiveProjectControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const liveProjects = await liveProjectInfo.findByIdAndDelete(id);
+    if (!liveProjects) {
+      return next(createError(404, "Project Information not found"));
+    }
     return res.status(200).json({
+      success: true,
       message: "Deleted successfully",
     });
   } catch (error) {

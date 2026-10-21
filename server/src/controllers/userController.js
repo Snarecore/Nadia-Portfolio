@@ -14,7 +14,10 @@ const introController = async (req, res, next) => {
       twitterLink: req.body.twitterLink,
     };
     const introData = await userIntro.create(newIntro);
-    return res.status(200).send(introData);
+    return res.status(201).json({
+      success: true,
+      data: introData,
+    });
   } catch (error) {
     next(error);
   }
@@ -36,7 +39,13 @@ const getIntroControllerByID = async (req, res, next) => {
   try {
     const id = req.params.id;
     const intro = await userIntro.findById(id);
-    return res.status(200).send(intro);
+    if (!intro) {
+      return next(createError(404, "Intro not found"));
+    }
+    return res.status(200).json({
+      success: true,
+      data: intro,
+    });
   } catch (error) {
     next(error);
   }
@@ -52,7 +61,10 @@ const updateIntroControllerByID = async (req, res, next) => {
     if (!updatedIntro) {
       return next(createError(404, "Intro not found"));
     }
-    return res.status(200).send(updatedIntro);
+    return res.status(200).json({
+      success: true,
+      data: updatedIntro,
+    });
   } catch (error) {
     next(error);
   }
@@ -62,7 +74,11 @@ const deleteIntroController = async (req, res, next) => {
   try {
     const id = req.params.id;
     const intro = await userIntro.findByIdAndDelete(id);
-    return res.send(201).json({
+    if (!intro) {
+      return next(createError(404, "Intro not found"));
+    }
+    return res.status(200).json({
+      success: true,
       message: "Deleted Successfully",
     });
   } catch (error) {

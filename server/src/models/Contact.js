@@ -4,19 +4,19 @@ const contactSchema = new Schema(
   {
     contactDescription: {
       type: String,
-      required: true,
+      default: "",
     },
     gmail: {
       type: String,
-      required: true,
+      default: "",
     },
     phoneNo: {
       type: String,
-      required: true,
+      default: "",
     },
     currentLocation: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   { timestamps: true }

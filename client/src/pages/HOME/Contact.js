@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import API from "../../api/apiClient";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const Contact = () => {
+  const { contact } = usePortfolio();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const [contactDescription, setContactDescription] = useState("");
-  const [gmail, setGmail] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [currentLocation, setCurrentLocation] = useState("");
+  const contactDescription = contact?.contactDescription || "";
+  const gmail = contact?.gmail || "";
+  const phoneNo = contact?.phoneNo || "";
+  const currentLocation = contact?.currentLocation || "";
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -24,22 +25,6 @@ const Contact = () => {
     setMessage("");
     setTimeout(() => setSuccessMessage(""), 4000);
   };
-
-  useEffect(() => {
-    API.get("/contact")
-      .then((res) => {
-        const contact = res.data?.data?.[0];
-        if (contact) {
-          setContactDescription(contact.contactDescription || "");
-          setGmail(contact.gmail || "");
-          setPhoneNo(contact.phoneNo || "");
-          setCurrentLocation(contact.currentLocation || "");
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching contact info:", error);
-      });
-  }, []);
 
   return (
     <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800">
@@ -104,7 +89,6 @@ const Contact = () => {
                   type="text"
                   name="name"
                   id="name"
-                  required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Alex Smith"
@@ -117,10 +101,9 @@ const Contact = () => {
                   Your Email
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   name="email"
                   id="email"
-                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="alex@example.com"
@@ -135,7 +118,6 @@ const Contact = () => {
                 <textarea
                   name="message"
                   id="message"
-                  required
                   rows="3"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}

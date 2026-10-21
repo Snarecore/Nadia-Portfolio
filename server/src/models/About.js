@@ -4,15 +4,15 @@ const aboutSchema = new Schema(
   {
     aboutImage: {
       type: String,
-      required: true,
+      default: "",
     },
     aboutDesignation: {
       type: String,
-      required: true,
+      default: "",
     },
     aboutParagraph: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   { timestamps: true }

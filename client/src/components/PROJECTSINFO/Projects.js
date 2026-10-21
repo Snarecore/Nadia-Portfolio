@@ -1,33 +1,14 @@
-import React, { useEffect, useState } from "react";
-import API from "../../api/apiClient";
+import React from "react";
+import { usePortfolio } from "../../context/PortfolioContext";
 
 const ProjectsInfo = () => {
-  const [noOfExperience, setNoOfExperience] = useState("");
-  const [noOfProjectCompleted, setNoOfProjectCompleted] = useState("");
-  const [noOfTechnology, setNoOfTechnology] = useState("");
-  const [noOfCodeCommits, setNoOfCodeCommits] = useState("");
-
-  useEffect(() => {
-    API.get("/projectInfo")
-      .then((res) => {
-        const projectInfo = res.data?.data?.[0];
-        if (projectInfo) {
-          setNoOfExperience(projectInfo.noOfExperience ?? 0);
-          setNoOfProjectCompleted(projectInfo.noOfProjectCompleted ?? 0);
-          setNoOfTechnology(projectInfo.noOfTechnology ?? 0);
-          setNoOfCodeCommits(projectInfo.noOfCodeCommits ?? 0);
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
-  }, []);
+  const { projectStats } = usePortfolio();
 
   const stats = [
-    { value: noOfExperience, label: "Years of Experience" },
-    { value: noOfProjectCompleted, label: "Projects Completed" },
-    { value: noOfTechnology, label: "Technologies Mastered" },
-    { value: noOfCodeCommits, label: "Code Commits" },
+    { value: projectStats?.noOfExperience ?? 0, label: "Years of Experience" },
+    { value: projectStats?.noOfProjectCompleted ?? 0, label: "Projects Completed" },
+    { value: projectStats?.noOfTechnology ?? 0, label: "Technologies Mastered" },
+    { value: projectStats?.noOfCodeCommits ?? 0, label: "Code Commits" },
   ];
 
   return (
