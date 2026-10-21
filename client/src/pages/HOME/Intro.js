@@ -19,8 +19,8 @@ const Intro = () => {
 
   return (
     <section className="pt-20 sm:pt-24 md:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
-      <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-6 md:gap-10">
-        <div className="flex-1 text-center md:text-left">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-10">
+        <div className="w-full md:w-auto md:max-w-md lg:max-w-lg xl:max-w-xl text-center md:text-left flex-shrink-0">
           <span className="inline-block text-xs uppercase tracking-widest text-sky-400 font-semibold mb-1.5">
             As-salamu Alaikum
           </span>
@@ -94,12 +94,14 @@ const Intro = () => {
         </div>
 
         {profileImg && (
-          <div className="flex-shrink-0">
-            <img
-              src={profileImg}
-              alt={name || "Profile"}
-              className="w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 object-cover rounded-full ring-4 ring-sky-500/20 shadow-2xl"
-            />
+          <div className="flex-1 w-full flex justify-center md:justify-end">
+            <div className="w-full rounded-2xl overflow-hidden border border-gray-700/80 shadow-2xl bg-gray-900/60 ring-1 ring-sky-500/20 flex items-center justify-center">
+              <img
+                src={profileImg}
+                alt={name || "Profile"}
+                className="w-full h-auto max-h-72 lg:max-h-80 xl:max-h-[340px] object-contain block"
+              />
+            </div>
           </div>
         )}
       </div>

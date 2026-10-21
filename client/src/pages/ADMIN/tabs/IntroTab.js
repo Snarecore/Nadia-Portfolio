@@ -128,12 +128,12 @@ const IntroTab = ({ data, onChange, onSave, saving }) => {
             <img
               src={data.profileImage}
               alt="Preview"
-              className="w-14 h-14 object-cover rounded-full ring-2 ring-sky-500/30"
+              className="w-16 h-16 object-cover rounded-xl border border-gray-700 shadow ring-1 ring-sky-500/30"
               onError={(e) => (e.target.style.display = "none")}
             />
             <div className="text-xs text-gray-400">
               <span className="text-sky-400 font-semibold block">Live Profile Image Preview</span>
-              Image is loading and formatted properly.
+              Square image preview is active and formatted properly.
             </div>
           </div>
         )}
