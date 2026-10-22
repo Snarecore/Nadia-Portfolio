@@ -5,8 +5,10 @@ import { FaBars, FaTimes } from "react-icons/fa";
 const Navbar = ({
   scrollToIntro,
   scrollToAbout,
-  scrollToService,
   scrollToProjects,
+  scrollToExperience,
+  scrollToTools,
+  scrollToService,
   scrollToContact,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,9 +17,11 @@ const Navbar = ({
   };
 
   const handleNavClick = (scrollFn) => {
-    scrollFn();
+    if (scrollFn) scrollFn();
     setIsOpen(false);
   };
+
+  const onExperienceClick = scrollToExperience || scrollToService;
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-gray-900/85 backdrop-blur-md z-50 border-b border-gray-800 text-white transition-all">
@@ -37,12 +41,17 @@ const Navbar = ({
           <button onClick={scrollToAbout} className="hover:text-sky-400 transition">
             About
           </button>
-          <button onClick={scrollToService} className="hover:text-sky-400 transition">
-            Services
+          <button onClick={onExperienceClick} className="hover:text-sky-400 transition">
+            Experience
           </button>
           <button onClick={scrollToProjects} className="hover:text-sky-400 transition">
             Projects
           </button>
+          {scrollToTools && (
+            <button onClick={scrollToTools} className="hover:text-sky-400 transition">
+              Tools
+            </button>
+          )}
           <button onClick={scrollToContact} className="hover:text-sky-400 transition">
             Contact
           </button>
@@ -74,12 +83,17 @@ const Navbar = ({
           <button onClick={() => handleNavClick(scrollToAbout)} className="text-left py-1 hover:text-sky-400">
             About
           </button>
-          <button onClick={() => handleNavClick(scrollToService)} className="text-left py-1 hover:text-sky-400">
-            Services
+          <button onClick={() => handleNavClick(onExperienceClick)} className="text-left py-1 hover:text-sky-400">
+            Experience
           </button>
           <button onClick={() => handleNavClick(scrollToProjects)} className="text-left py-1 hover:text-sky-400">
             Projects
           </button>
+          {scrollToTools && (
+            <button onClick={() => handleNavClick(scrollToTools)} className="text-left py-1 hover:text-sky-400">
+              Tools
+            </button>
+          )}
           <button onClick={() => handleNavClick(scrollToContact)} className="text-left py-1 hover:text-sky-400">
             Contact
           </button>

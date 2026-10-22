@@ -1,5 +1,4 @@
 import React from "react";
-import LeftSlider from "../LEFTSLIDER/LeftSlider";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,7 +13,6 @@ const Footer = () => {
           © {currentYear} All Rights Reserved.
         </p>
       </div>
-      <LeftSlider />
     </footer>
   );
 };

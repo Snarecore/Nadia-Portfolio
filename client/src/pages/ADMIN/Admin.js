@@ -350,7 +350,7 @@ const Admin = () => {
           { id: "intro", label: "Hero / Intro" },
           { id: "projectInfo", label: "Career Stats" },
           { id: "about", label: "About Me" },
-          { id: "services", label: "Services" },
+          { id: "services", label: "Experience" },
           { id: "projects", label: "Projects" },
           { id: "contact", label: "Contact Info" },
         ].map((tab) => (

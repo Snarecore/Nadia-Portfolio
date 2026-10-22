@@ -11,14 +11,14 @@ const ServiceTab = ({
 }) => {
   return (
     <div className="space-y-8">
-      {/* 1. Services Overview Paragraph */}
+      {/* 1. Experience Overview Paragraph */}
       <div>
         <div className="flex justify-between items-center mb-6 pb-3 border-b border-gray-800">
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-sky-400">
-              Services Overview
+              Experience Overview
             </h2>
-            <p className="text-xs text-gray-400 mt-0.5">Top-level introductory paragraph for services section</p>
+            <p className="text-xs text-gray-400 mt-0.5">Top-level introductory paragraph for experience section</p>
           </div>
           {data._id && (
             <span className="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30">
@@ -34,7 +34,7 @@ const ServiceTab = ({
             </label>
             <textarea
               rows="3"
-              placeholder="Describe the services and solutions you deliver..."
+              placeholder="Describe your career journey, expertise, and development experience..."
               value={data.serviceParagraph || ""}
               onChange={(e) => onChange({ ...data, serviceParagraph: e.target.value })}
               className="w-full bg-gray-800/80 border border-gray-700 rounded-xl py-2.5 px-3.5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
@@ -51,18 +51,18 @@ const ServiceTab = ({
         </form>
       </div>
 
-      {/* 2. Service Cards Management */}
+      {/* 2. Experience Cards Management */}
       <div className="pt-6 border-t border-gray-800">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
           <div>
-            <h3 className="text-lg font-bold text-white">Service Cards ({cards.length})</h3>
-            <p className="text-xs text-gray-400">Individual skill or offering cards</p>
+            <h3 className="text-lg font-bold text-white">Experience Roles ({cards.length})</h3>
+            <p className="text-xs text-gray-400">Individual jobs, internships, or professional roles</p>
           </div>
           <Link
             to="/page/admin/addServiceCard"
             className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-2 rounded-lg transition shadow"
           >
-            + Add New Service Card
+            + Add New Experience Role
           </Link>
         </div>
 

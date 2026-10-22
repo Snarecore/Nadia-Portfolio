@@ -114,7 +114,7 @@ const Projects = () => {
       </div>
 
       {liveProjects && liveProjects.length > 0 ? (
-        <div className="relative max-w-6xl mx-auto">
+        <div className="relative w-full mx-auto">
           {/* Central Vertical Timeline Spine (Desktop) */}
           <div className="hidden md:block absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
 
