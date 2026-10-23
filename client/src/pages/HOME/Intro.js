@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaFacebook, FaBehance } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { usePortfolio } from "../../context/PortfolioContext";
@@ -12,14 +11,20 @@ const Intro = () => {
   const { intro } = usePortfolio();
   const containerRef = useRef(null);
 
-  const profileImg = intro?.profileImage || "";
+  const profileImg =
+    intro?.profileImage || "https://i.ibb.co.com/VW9XQ7Z2/portfolio-image.jpg";
   const CV = intro?.cv || "";
-  const name = intro?.name || "";
-  const paragraph = intro?.paragraph || "";
+  const name = intro?.name || "Nadia Esrat Ifti Sowa";
+  const paragraph =
+    intro?.paragraph ||
+    "UI/UX Designer with a Computer Science background. I design clean, thoughtful digital experiences with a solid understanding of frontend code and research-driven thinking.";
   const githubLink = intro?.githubLink || "";
-  const linkedInLink = intro?.linkedInLink || "";
+  const linkedInLink =
+    intro?.linkedInLink ||
+    "https://www.linkedin.com/in/nadia-esrat-ifti-759b45285/";
   const facebookLink = intro?.facebookLink || "";
-  const twitterLink = intro?.twitterLink || "";
+  const twitterLink =
+    intro?.twitterLink || "https://www.behance.net/nadiaesratiftisowa";
 
   useGSAP(
     () => {
@@ -112,44 +117,48 @@ const Intro = () => {
 
             <div className="flex items-center space-x-2.5 text-base text-gray-400">
               {githubLink && (
-                <Link
-                  to={githubLink}
+                <a
+                  href={githubLink}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="intro-action-item p-2 rounded-lg bg-gray-800/80 hover:text-white hover:bg-gray-700 transition"
                   aria-label="GitHub"
                 >
                   <FaGithub />
-                </Link>
+                </a>
               )}
               {linkedInLink && (
-                <Link
-                  to={linkedInLink}
+                <a
+                  href={linkedInLink}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="intro-action-item p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
                   aria-label="LinkedIn"
                 >
                   <FaLinkedin />
-                </Link>
+                </a>
               )}
               {facebookLink && (
-                <Link
-                  to={facebookLink}
+                <a
+                  href={facebookLink}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="intro-action-item p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
                   aria-label="Facebook"
                 >
                   <FaFacebook />
-                </Link>
+                </a>
               )}
               {twitterLink && (
-                <Link
-                  to={twitterLink}
+                <a
+                  href={twitterLink}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="intro-action-item p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
                   aria-label="Behance"
                 >
                   <FaBehance />
-                </Link>
+                </a>
               )}
             </div>
           </div>

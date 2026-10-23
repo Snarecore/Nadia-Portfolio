@@ -2,8 +2,25 @@ import axios from "axios";
 
 const getBaseURL = () => {
   const envUrl = process.env.REACT_APP_API_BASE_URL;
-  if (!envUrl) return "/api";
-  return envUrl.trim().replace(/\/+$/, "");
+
+  // On production domains (e.g. Vercel, Netlify, or custom domains)
+  if (
+    typeof window !== "undefined" &&
+    window.location.hostname !== "localhost" &&
+    window.location.hostname !== "127.0.0.1"
+  ) {
+    // If env variable is omitted or points to localhost in production build
+    if (!envUrl || envUrl.includes("localhost") || envUrl.includes("127.0.0.1")) {
+      return "https://nadia-portfolio-chi.vercel.app/api";
+    }
+    return envUrl.trim().replace(/\/+$/, "");
+  }
+
+  // Local development
+  if (envUrl) {
+    return envUrl.trim().replace(/\/+$/, "");
+  }
+  return "http://localhost:4000/api";
 };
 
 const API = axios.create({

@@ -100,9 +100,39 @@ const ProjectCard = ({ project, projectNum }) => {
   );
 };
 
+// Authentic default projects matching user's real portfolio work
+const defaultProjects = [
+  {
+    _id: "default-alms-1",
+    projectImage:
+      "https://i.ibb.co.com/PsYN29Tw/Attendance-and-Leave-Management-Showcase.png",
+    projectNo: "01",
+    projectTitle: "Attendance & Leave Management System",
+    projectParagraph:
+      "Modern corporate attendance tracking and leave management application designed with intuitive user journey, clean dashboards, and responsive components.",
+    projectLiveLink:
+      "https://www.figma.com/design/gVvH4uAZ5lQ5iYr0PoYySL/ALMS?node-id=351-5&t=gABCpieJu1y94xoe-1",
+    projectGithubLink: "",
+  },
+  {
+    _id: "default-ecommerce-2",
+    projectImage: "",
+    projectNo: "02",
+    projectTitle: "E-Commerce Mobile App",
+    projectParagraph:
+      "End-to-end e-commerce mobile application interface focused on frictionless product discovery, minimalist visual hierarchy, and streamlined checkout experience.",
+    projectLiveLink:
+      "https://www.figma.com/design/ZC2KWKuKXNvig35oXxqn4N/FOUR-PILLARS?node-id=0-1&t=FLqBMq7qoetDadxa-1",
+    projectGithubLink: "",
+  },
+];
+
 const Projects = () => {
   const { liveProjects } = usePortfolio();
   const containerRef = useRef(null);
+
+  const displayProjects =
+    liveProjects && liveProjects.length > 0 ? liveProjects : defaultProjects;
 
   useGSAP(
     () => {
@@ -170,7 +200,7 @@ const Projects = () => {
         }
       });
     },
-    { scope: containerRef, dependencies: [liveProjects] }
+    { scope: containerRef, dependencies: [displayProjects] }
   );
 
   return (
@@ -188,7 +218,7 @@ const Projects = () => {
         </h2>
       </div>
 
-      {liveProjects && liveProjects.length > 0 ? (
+      {displayProjects && displayProjects.length > 0 ? (
         <div className="relative w-full mx-auto">
           {/* Central Vertical Timeline Spine (Desktop) */}
           <div className="hidden md:block absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
@@ -197,7 +227,7 @@ const Projects = () => {
           <div className="md:hidden absolute left-5 top-4 bottom-4 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
 
           <div className="space-y-12 md:space-y-16">
-            {liveProjects.map((project, index) => {
+            {displayProjects.map((project, index) => {
               const isEven = index % 2 === 0;
               const projectNum = project.projectNo
                 ? project.projectNo.replace("#", "")
