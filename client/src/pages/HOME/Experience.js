@@ -144,8 +144,7 @@ const parseDatabaseCard = (card, index) => {
 };
 
 const Experience = () => {
-  const { service, serviceCards } = usePortfolio();
-  const paragraph = service?.serviceParagraph || "";
+  const { serviceCards } = usePortfolio();
   const containerRef = useRef(null);
 
   // Determine whether to use database cards or rich fallback
@@ -204,22 +203,13 @@ const Experience = () => {
       className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
     >
       {/* Header */}
-      <div className="experience-header text-center mb-8 md:mb-10">
+      <div className="experience-header text-center mb-6 md:mb-8">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Career & Journey
         </span>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
           Work Experience
         </h2>
-        {paragraph ? (
-          <p className="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mt-2 leading-relaxed">
-            {paragraph}
-          </p>
-        ) : (
-          <p className="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mt-2 leading-relaxed">
-            A comprehensive overview of my professional roles, engineering contributions, and technical expertise.
-          </p>
-        )}
       </div>
 
       {/* Experience Cards List aligned with Navbar */}

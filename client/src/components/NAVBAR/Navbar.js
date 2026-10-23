@@ -74,14 +74,9 @@ const Navbar = ({
               />
             </svg>
           </div>
-          <div className="flex flex-col text-left leading-none">
-            <span className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-sky-400 transition-colors">
-              Nadia<span className="text-sky-400">.</span>
-            </span>
-            <span className="text-[9px] tracking-widest uppercase font-semibold text-gray-400 group-hover:text-gray-300 transition-colors mt-0.5">
-              Product Design
-            </span>
-          </div>
+          <span className="text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-sky-400 transition-colors">
+            Nadia<span className="text-sky-400">.</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}

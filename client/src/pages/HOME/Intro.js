@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFacebook, FaBehance } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { usePortfolio } from "../../context/PortfolioContext";
 import gsap from "gsap";
@@ -146,9 +146,9 @@ const Intro = () => {
                   to={twitterLink}
                   target="_blank"
                   className="intro-action-item p-2 rounded-lg bg-gray-800/80 hover:text-sky-400 hover:bg-gray-700 transition"
-                  aria-label="Twitter"
+                  aria-label="Behance"
                 >
-                  <FaTwitter />
+                  <FaBehance />
                 </Link>
               )}
             </div>

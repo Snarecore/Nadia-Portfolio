@@ -18,7 +18,6 @@ const Contact = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const containerRef = useRef(null);
 
-  const contactDescription = contact?.contactDescription || "";
   const gmail = contact?.gmail || "";
   const phoneNo = contact?.phoneNo || "";
   const currentLocation = contact?.currentLocation || "";
@@ -84,13 +83,9 @@ const Contact = () => {
             <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold mb-1 block">
               Get In Touch
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-5">
               Let's Talk About Your Project
             </h2>
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-5 max-w-md">
-              {contactDescription ||
-                "Have a question, proposal, or want to collaborate? Feel free to reach out anytime."}
-            </p>
 
             <div className="space-y-3 text-xs sm:text-sm text-gray-300">
               {gmail && (

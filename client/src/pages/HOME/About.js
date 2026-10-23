@@ -121,7 +121,7 @@ const About = () => {
 
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
               {aboutInfo?.aboutParagraph ||
-                "I design clean, functional, and user-friendly digital products. With a background in Computer Science, I bridge the gap between design and engineering—understanding code helps me create interfaces that are intuitive for users and practical for developers to build. I also have an active interest in scientific research, which keeps my design decisions grounded in user data, structured problem-solving, and intentional UX architecture."}
+                "I design clean, functional, and user-friendly digital products. With a background in Computer Science, I bridge the gap between design and engineering - understanding code helps me create interfaces that are intuitive for users and practical for developers to build. I also have an active interest in scientific research, which keeps my design decisions grounded in user data, structured problem-solving, and intentional UX architecture."}
             </p>
 
             {/* Quick Highlight Metrics / Strengths */}

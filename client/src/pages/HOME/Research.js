@@ -79,16 +79,13 @@ const Research = () => {
       className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
     >
       {/* Section Header */}
-      <div className="research-header text-center mb-6 md:mb-9">
+      <div className="research-header text-center mb-6 md:mb-8">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Academic Scholarship & Scientific Publications
         </span>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
           Research <span className="text-sky-400">Publications</span>
         </h2>
-        <p className="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mt-2 leading-relaxed">
-          Peer-reviewed scientific contributions published in world-renowned journals, focusing on distributed consensus, marine sensor networks, and blockchain security.
-        </p>
       </div>
 
       {/* Main Publication Showcase Card */}
