@@ -4,6 +4,8 @@ const createError = require("http-errors");
 const xssClean = require("xss-clean");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const connectDB = require("./config/data");
 
 const Router = require("./routes/userRoute");
 const projectInfoRouter = require("./routes/projectInfoRoute");
@@ -80,6 +82,35 @@ app.use(xssClean());
 app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serverless DB connection middleware (ensures Mongoose is ready before processing requests)
+app.use(async (req, res, next) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      await connectDB();
+    }
+    next();
+  } catch (err) {
+    console.error("DB connection error in serverless middleware:", err.message || err);
+    next();
+  }
+});
+
+// Friendly root route confirming API health
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Nadia's Portfolio Backend API is up and running!",
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      about: "/api/about",
+      intro: "/api/intro",
+      projects: "/api/liveProject",
+      contact: "/api/contact",
+      services: "/api/serviceCard"
+    }
+  });
+});
 
 app.use("/api", Router);
 app.use("/", Router);
