@@ -109,17 +109,6 @@ const About = () => {
                       alt={aboutInfo?.aboutDesignation || "Profile"}
                       className="w-full h-auto object-cover block"
                     />
-                    
-                    {/* Live Status Pill with pulsating indicator */}
-                    <div className="absolute bottom-2 left-2 right-2 bg-gray-950/85 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-gray-700/60 flex items-center justify-center gap-2 shadow-lg">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                      </span>
-                      <span className="text-[11px] font-semibold text-gray-200 tracking-wide">
-                        Available for Projects
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
