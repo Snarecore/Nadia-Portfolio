@@ -25,7 +25,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-// All Skills & Tools in ONE Unified Line (Exception & Multithread Removed)
+// All Skills & Tools in ONE Unified Line
 const allSkills = [
   { name: "Figma", icon: <SiFigma className="text-[#F24E1E]" /> },
   { name: "Adobe XD", icon: <SiAdobexd className="text-[#FF61F6]" /> },
@@ -68,14 +68,14 @@ const Tools = () => {
         }
       );
 
-      // Card entrance
+      // Skills board entrance
       gsap.fromTo(
         ".tools-board",
-        { opacity: 0, y: 16 },
+        { opacity: 0, y: 14 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
+          duration: 0.55,
           ease: "power2.out",
           clearProps: "opacity,transform",
           scrollTrigger: {
@@ -89,17 +89,35 @@ const Tools = () => {
       // Stagger on individual tiles
       gsap.fromTo(
         ".tool-tile",
-        { opacity: 0, scale: 0.95 },
+        { opacity: 0, scale: 0.96 },
         {
           opacity: 1,
           scale: 1,
-          duration: 0.35,
+          duration: 0.3,
           stagger: 0.015,
           ease: "power2.out",
           clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // Achievements section entrance (subtle, unified)
+      gsap.fromTo(
+        ".achievements-section",
+        { opacity: 0, y: 12 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: ".achievements-section",
+            start: "top 88%",
             once: true,
           },
         }
@@ -111,7 +129,7 @@ const Tools = () => {
   return (
     <section
       ref={containerRef}
-      className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+      className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
     >
       {/* Section Header */}
       <div className="tools-header text-center mb-5 md:mb-6">
@@ -139,6 +157,133 @@ const Tools = () => {
               </span>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Clean, Editorial Resume-Style Presentation (Understated, No Fake AI Gradients) */}
+      <div className="achievements-section mt-10 md:mt-12 pt-8 border-t border-gray-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          
+          {/* Column 1: Achievements & Certifications */}
+          <div>
+            <div className="border-b border-gray-800 pb-2.5 mb-4">
+              <h3 className="text-xs uppercase tracking-widest text-sky-400 font-semibold">
+                Achievements
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {/* Vice Chancellor's Award */}
+              <div className="pb-3 border-b border-gray-850">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h4 className="text-sm font-semibold text-white">
+                    Vice Chancellor's Award
+                  </h4>
+                  <span className="text-[11px] text-sky-400 shrink-0 font-medium">
+                    GPA ≥ 3.90
+                  </span>
+                </div>
+                <div className="text-xs text-sky-400/90 mt-0.5">
+                  Green University of Bangladesh
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed mt-1.5">
+                  Received four Vice Chancellor's Certificates for maintaining an outstanding GPA of 3.90 or above.
+                </p>
+              </div>
+
+              {/* Dean's Award */}
+              <div className="pb-3 border-b border-gray-850">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h4 className="text-sm font-semibold text-white">
+                    Dean's Award
+                  </h4>
+                  <span className="text-[11px] text-sky-400 shrink-0 font-medium">
+                    GPA ≥ 3.80
+                  </span>
+                </div>
+                <div className="text-xs text-sky-400/90 mt-0.5">
+                  Green University of Bangladesh
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed mt-1.5">
+                  Received three Dean's Certificates for securing and maintaining a GPA of 3.80 or above.
+                </p>
+              </div>
+
+              {/* Professional Certifications */}
+              <div className="pt-0.5">
+                <div className="flex items-baseline justify-between gap-3 mb-2">
+                  <h4 className="text-sm font-semibold text-white">
+                    Professional Certifications
+                  </h4>
+                  <span className="text-[11px] text-sky-400 shrink-0 font-medium">
+                    Coursera
+                  </span>
+                </div>
+                <ul className="space-y-2 text-xs text-gray-400 pl-3">
+                  <li className="list-disc">
+                    <span className="text-gray-300 font-medium">University of Michigan:</span>{" "}
+                    Programming for Everybody (Getting Started with Python) &amp; Python Data Structures.
+                  </li>
+                  <li className="list-disc">
+                    <span className="text-gray-300 font-medium">DeepLearning.AI:</span>{" "}
+                    AI for Everyone (Offered through Coursera).
+                  </li>
+                  <li className="list-disc">
+                    <span className="text-gray-300 font-medium">Coursera Project Network:</span>{" "}
+                    Google Ads for Beginners.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2: Extra-Curricular Activities */}
+          <div>
+            <div className="border-b border-gray-800 pb-2.5 mb-4">
+              <h3 className="text-xs uppercase tracking-widest text-sky-400 font-semibold">
+                Extra-Curricular Activities
+              </h3>
+            </div>
+
+            <div className="space-y-4">
+              {/* Student Mentor */}
+              <div className="pb-3 border-b border-gray-850">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h4 className="text-sm font-semibold text-white">
+                    Student Mentor
+                  </h4>
+                  <span className="text-[11px] text-sky-400 shrink-0 font-medium">
+                    Jan 2022 – Jan 2023
+                  </span>
+                </div>
+                <div className="text-xs text-sky-400/90 mt-0.5">
+                  Green University of Bangladesh <span className="text-gray-600">•</span> Dhaka, Bangladesh
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed mt-1.5">
+                  Guided and mentored junior students, assisting them with academic course material and university transition.
+                </p>
+              </div>
+
+              {/* Volunteer */}
+              <div className="pb-3 border-b border-gray-850">
+                <div className="flex items-baseline justify-between gap-3">
+                  <h4 className="text-sm font-semibold text-white">
+                    Volunteer
+                  </h4>
+                  <span className="text-[11px] text-sky-400 shrink-0 font-medium">
+                    2022
+                  </span>
+                </div>
+                <div className="text-xs text-sky-400/90 mt-0.5">
+                  ICPC Asia Dhaka Regional Contest <span className="text-gray-600">•</span> Dhaka, Bangladesh
+                </div>
+                <p className="text-xs text-gray-400 leading-relaxed mt-1.5">
+                  Contributed as a volunteer for the International Collegiate Programming Contest (ICPC), assisting in event coordination and logistics.
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

@@ -5,10 +5,8 @@ import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
 
 import profile from "../assets/profile-pic.png";
-import CV from "../assets/CV/Zubayer Farazi.pdf";
 import About from "./HOME/About";
 import Service from "./Service";
-import ProjectsInfo from "../components/PROJECTSINFO/Projects";
 import Projects from "../Projects";
 import Contact from "./HOME/Contact";
 import Footer from "../components/FOOTER/Footer";
@@ -21,14 +19,10 @@ const Home = () => {
           <h1 className="text-xl">As-salamu Alaikum</h1>
           <h1 className="text-5xl md:text-7xl">Hello, I'm</h1>
           <h1 className="text-5xl md:text-8xl text-sky-600 font-bold">
-            Zubayer Farazi
+            Nadia
           </h1>
           <p className="text-xl max-w-2xl md:text-2xl pt-10 tracking-wide font-playwrite">
-            Welcome to my portfolio! I'm a passionate computer science student
-            with a solid foundation in frontend development and a keen interest
-            in creating innovative software solutions. Explore my projects,
-            skills, and experiences as I journey through the world of
-            technology, striving to make a meaningful impact.
+            UI/UX Designer &amp; Product Specialist bridging intuitive design, research, and frontend architecture.
           </p>
           {/* <p className="text-xl md:text-2xl tracking-wide font-playwrite leading-loose">
             I am proficient in various programming languages and technologies.
@@ -49,29 +43,25 @@ const Home = () => {
             </a>
             <div className="flex space-x-5 ">
               <Link
-                to="https://github.com/zubayerfarazi"
-                target="_blank"
+                to="#"
                 className="text-black dark:text-white text-4xl hover:text-gray-600"
               >
                 <FaGithub />
               </Link>
               <Link
-                to="www.linkedin.com/in/zubayerfarazi"
-                target="_blank"
+                to="#"
                 className="text-black dark:text-white text-4xl hover:text-gray-600"
               >
                 <FaLinkedin />
               </Link>
               <Link
-                to="https://www.facebook.com/zubayer.forazi"
-                target="_blank"
+                to="#"
                 className="text-black dark:text-white text-4xl hover:text-gray-600"
               >
                 <FaFacebook />
               </Link>
               <Link
-                to="https://x.com/FaraziZubayer"
-                target="_blank"
+                to="#"
                 className="text-black dark:text-white text-4xl hover:text-gray-600"
               >
                 <FaTwitter />
@@ -85,7 +75,6 @@ const Home = () => {
           className="rounded-full w-48 md:w-64 lg:w-80"
         />
       </div>
-      <ProjectsInfo></ProjectsInfo>
       <About></About>
       <Service></Service>
       <Projects></Projects>

@@ -89,9 +89,9 @@ const About = () => {
   return (
     <section
       ref={containerRef}
-      className="py-8 md:py-10 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800"
+      className="py-8 md:py-10 bg-gray-900/60 border-t border-gray-800"
     >
-      <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Left Column: Profile Card, Bio & Highlights */}
           <div className="about-left-col lg:col-span-5 space-y-4 text-center md:text-left">
@@ -263,14 +263,27 @@ const About = () => {
               {visibleSection === "education" && (
                 <div className="space-y-3 text-left">
                   <div className="p-4 rounded-xl bg-gray-850/60 border border-gray-800">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <FaGraduationCap className="text-sky-400 text-sm" />
-                      <h4 className="font-bold text-white text-sm">B.Sc. in Computer Science & Engineering</h4>
+                    <div className="flex items-center justify-between mb-1.5 flex-wrap gap-1">
+                      <div className="flex items-center gap-2">
+                        <FaGraduationCap className="text-sky-400 text-sm" />
+                        <h4 className="font-bold text-white text-sm">B.Sc. in Computer Science &amp; Engineering</h4>
+                      </div>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 font-semibold border border-amber-500/30">
+                        Academic Honors
+                      </span>
                     </div>
-                    <p className="text-xs text-sky-400 font-medium">Undergraduate Degree</p>
+                    <p className="text-xs text-sky-400 font-medium">Green University of Bangladesh</p>
                     <p className="text-xs text-gray-300 leading-relaxed mt-1.5">
                       Core focus on Human-Computer Interaction (HCI), computing logic, algorithms, Object-Oriented Programming, and scientific research methodologies.
                     </p>
+                    <div className="flex flex-wrap gap-1.5 mt-2.5">
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-gray-900 text-amber-300 border border-gray-800">
+                        4× Vice Chancellor's Award (GPA ≥ 3.90)
+                      </span>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-gray-900 text-sky-300 border border-gray-800">
+                        3× Dean's Award (GPA ≥ 3.80)
+                      </span>
+                    </div>
                   </div>
                 </div>
               )}

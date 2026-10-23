@@ -75,9 +75,9 @@ const Contact = () => {
   return (
     <section
       ref={containerRef}
-      className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800"
+      className="py-10 md:py-14 bg-gray-900/60 border-t border-gray-800"
     >
-      <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Info Column */}
           <div className="contact-left-col">

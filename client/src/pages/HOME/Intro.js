@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import { MdOutlineFileDownload } from "react-icons/md";
-import ProjectsInfo from "../../components/PROJECTSINFO/Projects";
 import { usePortfolio } from "../../context/PortfolioContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -167,10 +166,6 @@ const Intro = () => {
             </div>
           </div>
         )}
-      </div>
-
-      <div className="mt-8 pt-6 border-t border-gray-800/80">
-        <ProjectsInfo />
       </div>
     </section>
   );
