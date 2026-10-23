@@ -11,7 +11,7 @@ const ServiceParaEdit = () => {
     API
       .get(`/service/${id}`)
       .then((res) => {
-        const service = res.data;
+        const service = res.data?.data || res.data;
         if (service) {
           setParagraph(service.serviceParagraph || "");
         }

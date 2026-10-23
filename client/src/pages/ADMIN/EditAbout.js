@@ -14,7 +14,7 @@ const EditAbout = () => {
     API
       .get(`/about/${id}`)
       .then((res) => {
-        const aboutInfo = res.data;
+        const aboutInfo = res.data?.data || res.data;
         if (aboutInfo) {
           setAboutImg(aboutInfo.aboutImage || "");
           setDesignation(aboutInfo.aboutDesignation || "");

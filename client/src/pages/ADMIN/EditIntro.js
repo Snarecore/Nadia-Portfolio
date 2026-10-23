@@ -18,7 +18,7 @@ const EditIntro = () => {
     API
       .get(`/intro/${id}`)
       .then((res) => {
-        const intro = res.data;
+        const intro = res.data?.data || res.data;
         if (intro) {
           setProfileImg(intro.profileImage || "");
           setCV(intro.cv || "");

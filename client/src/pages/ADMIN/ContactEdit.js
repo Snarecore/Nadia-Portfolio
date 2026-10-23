@@ -14,7 +14,7 @@ const ContactEdit = () => {
     API
       .get(`/contact/${id}`)
       .then((res) => {
-        const contact = res.data;
+        const contact = res.data?.data || res.data;
         if (contact) {
           setDescription(contact.contactDescription || "");
           setGmail(contact.gmail || "");

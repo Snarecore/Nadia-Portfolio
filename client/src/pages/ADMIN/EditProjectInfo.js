@@ -16,7 +16,7 @@ const EditProjectInfo = () => {
     API
       .get(`/liveProject/${id}`)
       .then((res) => {
-        const projectInfo = res.data;
+        const projectInfo = res.data?.data || res.data;
         if (projectInfo) {
           setProjectImg(projectInfo.projectImage || "");
           setProjectNumber(projectInfo.projectNo || "");

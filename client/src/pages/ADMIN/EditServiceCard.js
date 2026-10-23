@@ -13,7 +13,7 @@ const EditServiceCard = () => {
     API
       .get(`/serviceCard/${id}`)
       .then((res) => {
-        const cardInfo = res.data;
+        const cardInfo = res.data?.data || res.data;
         if (cardInfo) {
           setServiceImg(cardInfo.cardImage || "");
           setHeader(cardInfo.cardHeader || "");

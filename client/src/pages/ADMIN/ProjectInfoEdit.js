@@ -14,7 +14,7 @@ const ProjectInfoEdit = () => {
     API
       .get(`/projectInfo/${id}`)
       .then((res) => {
-        const projectInfo = res.data;
+        const projectInfo = res.data?.data || res.data;
         if (projectInfo) {
           setNoOfExperience(projectInfo.noOfExperience ?? "");
           setNoOfProjectCompleted(projectInfo.noOfProjectCompleted ?? "");
