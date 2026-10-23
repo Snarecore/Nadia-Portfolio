@@ -21,11 +21,9 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const About = () => {
   const [visibleSection, setVisibleSection] = useState("skills");
-  const { about, intro } = usePortfolio();
-  const aboutInfo = about || {};
+  const { about } = usePortfolio();
   const containerRef = useRef(null);
-
-  const profilePhoto = aboutInfo?.aboutImage || intro?.profileImage || "";
+  const aboutParagraph = about?.aboutParagraph || "";
 
   useGSAP(
     () => {
@@ -97,23 +95,6 @@ const About = () => {
           
           {/* Left Column: Eye-Catching Designer Profile Card, Bio & Pillars */}
           <div className="about-left-col lg:col-span-5 space-y-4 text-center md:text-left">
-            {profilePhoto && (
-              <div className="mb-4 flex justify-center md:justify-start">
-                <div className="relative group">
-                  {/* Subtle Ambient Radial Glow */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-sky-500/20 to-blue-600/20 rounded-2xl blur-lg opacity-70 group-hover:opacity-100 transition duration-300"></div>
-
-                  <div className="relative rounded-2xl overflow-hidden border border-gray-700/80 shadow-2xl bg-gray-900 max-w-[220px] sm:max-w-[250px]">
-                    <img
-                      src={profilePhoto}
-                      alt={aboutInfo?.aboutDesignation || "Profile"}
-                      className="w-full h-auto object-cover block"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Editorial Heading Hook */}
             <div>
               <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1">
@@ -124,14 +105,20 @@ const About = () => {
               </h2>
             </div>
 
-            {/* Breathable 2-Paragraph Bio */}
+            {/* Breathable Bio */}
             <div className="space-y-2 text-xs sm:text-sm text-gray-300 leading-relaxed">
-              <p>
-                I design clean, functional, and user-friendly digital products. With a background in Computer Science &amp; Engineering, I bridge the gap between design and engineering - understanding code helps me create interfaces that are intuitive for users and practical for developers to build.
-              </p>
-              <p className="text-gray-400">
-                I also have an active interest in scientific research, which keeps my design decisions grounded in user data, structured problem-solving, and intentional UX architecture.
-              </p>
+              {aboutParagraph ? (
+                <p>{aboutParagraph}</p>
+              ) : (
+                <>
+                  <p>
+                    I design clean, functional, and user-friendly digital products. With a background in Computer Science &amp; Engineering, I bridge the gap between design and engineering - understanding code helps me create interfaces that are intuitive for users and practical for developers to build.
+                  </p>
+                  <p className="text-gray-400">
+                    I also have an active interest in scientific research, which keeps my design decisions grounded in user data, structured problem-solving, and intentional UX architecture.
+                  </p>
+                </>
+              )}
             </div>
 
             {/* 3 Core Designer Pillar Cards with Micro-Icons */}
