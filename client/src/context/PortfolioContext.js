@@ -16,6 +16,34 @@ export const PortfolioProvider = ({ children }) => {
 
   const fetchPortfolioData = useCallback(async () => {
     try {
+      // 1. Senior Architecture: Try single consolidated profile query first
+      try {
+        const profileRes = await API.get("/profile");
+        if (profileRes.data?.success && profileRes.data?.data) {
+          const {
+            intro: dIntro,
+            about: dAbout,
+            contact: dContact,
+            stats: dStats,
+            service: dService,
+            serviceCards: dCards,
+            projects: dProjects,
+          } = profileRes.data.data;
+
+          if (dIntro) setIntro(dIntro);
+          if (dAbout) setAbout(dAbout);
+          if (dContact) setContact(dContact);
+          if (dStats) setProjectStats(dStats);
+          if (dService) setService(dService);
+          if (dCards) setServiceCards(dCards);
+          if (dProjects) setLiveProjects(dProjects);
+          return;
+        }
+      } catch (profileErr) {
+        // Fallback gracefully if consolidated endpoint is not available
+      }
+
+      // 2. Resilient parallel fallback for backward compatibility
       const [
         introRes,
         projectInfoRes,
@@ -67,6 +95,14 @@ export const PortfolioProvider = ({ children }) => {
 
   useEffect(() => {
     fetchPortfolioData();
+
+    // Auto-revalidate on window focus (TanStack Query pattern)
+    const handleWindowFocus = () => {
+      fetchPortfolioData();
+    };
+
+    window.addEventListener("focus", handleWindowFocus);
+    return () => window.removeEventListener("focus", handleWindowFocus);
   }, [fetchPortfolioData]);
 
   const value = {

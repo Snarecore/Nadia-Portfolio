@@ -6,27 +6,21 @@ const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const connectDB = require("./config/data");
-
-const Router = require("./routes/userRoute");
-const projectInfoRouter = require("./routes/projectInfoRoute");
-const contactRouter = require("./routes/contactRouter");
-const serviceRouter = require("./routes/serviceRouter");
-const cardRouter = require("./routes/serviceCardRouter");
-const liveProjectRouter = require("./routes/liveProjectInfoRoute");
-const aboutRouter = require("./routes/aboutRouter");
-const authRouter = require("./routes/authRoute");
+const v1Router = require("./routes/v1");
 
 const app = express();
 
 // Disable information disclosure
 app.disable("x-powered-by");
 
-// Standard Security Headers (OWASP recommendations)
+// Standard Security Headers (OWASP & Helmet-grade recommendations)
 app.use((req, res, next) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
   res.setHeader("X-XSS-Protection", "1; mode=block");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
 });
 
@@ -112,23 +106,12 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api", Router);
-app.use("/", Router);
-app.use("/api", projectInfoRouter);
-app.use("/", projectInfoRouter);
-app.use("/api", contactRouter);
-app.use("/", contactRouter);
-app.use("/api", serviceRouter);
-app.use("/", serviceRouter);
-app.use("/api", cardRouter);
-app.use("/", cardRouter);
-app.use("/api", liveProjectRouter);
-app.use("/", liveProjectRouter);
-app.use("/api", aboutRouter);
-app.use("/", aboutRouter);
-app.use("/api/auth", authRouter);
-app.use("/auth", authRouter);
-app.use("/api", authRouter);
+// Primary Centralized API Router (v1)
+app.use("/api/v1", v1Router);
+
+// Seamless Backward Compatibility for standard API clients
+app.use("/api", v1Router);
+app.use("/", v1Router);
 
 app.get("/test", (req, res) => {
   res.status(200).send("Congratulations on you first server");

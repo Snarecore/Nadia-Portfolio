@@ -4,6 +4,7 @@
   "private": true,
   "description": "Full Stack MERN Portfolio with CMS Dashboard",
   "scripts": {
+    "dev": "npm --prefix server run dev & npm --prefix client start",
     "server": "npm --prefix server run dev",
     "client": "npm --prefix client start",
     "build": "npm --prefix client run build",
@@ -17,6 +18,6 @@
     "mongodb",
     "portfolio"
   ],
-  "author": "Zubayer Farazi",
+  "author": "Nadia Esrat Ifti Sowa",
   "license": "ISC"
 }

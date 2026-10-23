@@ -1,10 +1,5 @@
 import "./App.css";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Home from "./pages/Home";
-// import About from "./pages/About";
-// import Service from "./pages/Service";
-// import Contact from "./pages/Contact";
 import Error from "./pages/Error";
 import Index from "./pages/HOME/Index";
 import Admin from "./pages/ADMIN/Admin";
@@ -26,15 +21,10 @@ function App() {
   return (
     <PortfolioProvider>
       <Router>
-      {/* <Navbar></Navbar> */}
-      <Routes>
-        {/* <Route path="/" element={<Home></Home>}></Route> */}
-        {/* <Route path="/about" element={<About></About>}></Route>
-        <Route path="/service" element={<Service></Service>}></Route>
-        <Route path="/project" element={<Projects></Projects>}></Route>
-        <Route path="/contact" element={<Contact></Contact>}></Route> */}
-        {/* <Route exact path="/home" element={<Home></Home>}></Route> */}
-        <Route path="/" element={<Index></Index>}></Route>
+        <Routes>
+          {/* Public Portfolio Route */}
+          <Route path="/" element={<Index />} />
+          <Route path="/home" element={<Index />} />
         
         {/* Admin Login */}
         <Route path="/page/admin/login" element={<AdminLogin></AdminLogin>}></Route>
