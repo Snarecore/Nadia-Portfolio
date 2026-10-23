@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { BsGithub } from "react-icons/bs";
 import { FaLaptopCode } from "react-icons/fa";
 import { usePortfolio } from "../../context/PortfolioContext";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const ProjectCard = ({ project, projectNum }) => {
   const targetLink = project.projectLiveLink || project.projectGithubLink || null;
@@ -97,11 +102,84 @@ const ProjectCard = ({ project, projectNum }) => {
 
 const Projects = () => {
   const { liveProjects } = usePortfolio();
+  const containerRef = useRef(null);
+
+  useGSAP(
+    () => {
+      // Header entrance
+      gsap.fromTo(
+        ".projects-header",
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // Individual project timeline rows
+      const rows = gsap.utils.toArray(".project-timeline-row");
+      rows.forEach((row, idx) => {
+        const isEven = idx % 2 === 0;
+        const card = row.querySelector(".project-card-wrapper");
+        const badge = row.querySelector(".project-badge-node");
+
+        if (badge) {
+          gsap.fromTo(
+            badge,
+            { opacity: 0, scale: 0.85 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.5,
+              ease: "power2.out",
+              clearProps: "opacity,transform",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 85%",
+                once: true,
+              },
+            }
+          );
+        }
+
+        if (card) {
+          gsap.fromTo(
+            card,
+            { opacity: 0, x: isEven ? -20 : 20 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.65,
+              ease: "power2.out",
+              clearProps: "opacity,transform",
+              scrollTrigger: {
+                trigger: row,
+                start: "top 85%",
+                once: true,
+              },
+            }
+          );
+        }
+      });
+    },
+    { scope: containerRef, dependencies: [liveProjects] }
+  );
 
   return (
-    <section className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800">
+    <section
+      ref={containerRef}
+      className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+    >
       {/* Header */}
-      <div className="text-center mb-12 md:mb-16">
+      <div className="projects-header text-center mb-12 md:mb-16">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Recent Works
         </span>
@@ -131,10 +209,10 @@ const Projects = () => {
               return (
                 <div
                   key={project._id || index}
-                  className="relative flex flex-col md:flex-row items-center"
+                  className="project-timeline-row relative flex flex-col md:flex-row items-center"
                 >
                   {/* Step / Number Badge Node on the Spine */}
-                  <div className="absolute left-5 md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-20">
+                  <div className="project-badge-node absolute left-5 md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-20">
                     <div className="w-10 h-10 rounded-xl bg-gray-900 border-2 border-sky-500 shadow-lg shadow-sky-500/30 flex items-center justify-center text-sky-400 font-mono font-bold text-xs ring-4 ring-gray-900 group-hover:scale-110 transition">
                       {projectNum}
                     </div>
@@ -150,12 +228,12 @@ const Projects = () => {
                   {/* Alternating Card Placement (ekta oi side, ekta ei side) */}
                   {isEven ? (
                     // Card on LEFT, Right empty
-                    <div className="w-full md:w-1/2 md:pr-12 lg:pr-16 md:mr-auto pl-14 md:pl-0">
+                    <div className="project-card-wrapper w-full md:w-1/2 md:pr-12 lg:pr-16 md:mr-auto pl-14 md:pl-0">
                       <ProjectCard project={project} projectNum={projectNum} />
                     </div>
                   ) : (
                     // Card on RIGHT, Left empty
-                    <div className="w-full md:w-1/2 md:pl-12 lg:pr-0 lg:pl-16 md:ml-auto pl-14 md:pl-0">
+                    <div className="project-card-wrapper w-full md:w-1/2 md:pl-12 lg:pr-0 lg:pl-16 md:ml-auto pl-14 md:pl-0">
                       <ProjectCard project={project} projectNum={projectNum} />
                     </div>
                   )}

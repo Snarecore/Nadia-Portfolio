@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { usePortfolio } from "../../context/PortfolioContext";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const Contact = () => {
   const { contact } = usePortfolio();
@@ -11,11 +16,52 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const containerRef = useRef(null);
 
   const contactDescription = contact?.contactDescription || "";
   const gmail = contact?.gmail || "";
   const phoneNo = contact?.phoneNo || "";
   const currentLocation = contact?.currentLocation || "";
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ".contact-left-col",
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".contact-right-col",
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          delay: 0.1,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -27,11 +73,14 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800">
+    <section
+      ref={containerRef}
+      className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 bg-gray-900/60 border-t border-gray-800"
+    >
       <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left Info Column */}
-          <div>
+          <div className="contact-left-col">
             <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold mb-1 block">
               Get In Touch
             </span>
@@ -78,7 +127,7 @@ const Contact = () => {
           </div>
 
           {/* Right Form Column */}
-          <div className="bg-gray-800/80 border border-gray-700/80 p-5 sm:p-6 md:p-7 rounded-xl shadow-xl w-full">
+          <div className="contact-right-col bg-gray-800/80 border border-gray-700/80 p-5 sm:p-6 md:p-7 rounded-xl shadow-xl w-full">
             <h3 className="text-base sm:text-lg font-bold text-white mb-3">Send a Message</h3>
             <form onSubmit={onSubmit} className="space-y-3 sm:space-y-3.5">
               <div>

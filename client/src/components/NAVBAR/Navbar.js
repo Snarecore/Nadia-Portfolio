@@ -1,17 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 const Navbar = ({
   scrollToIntro,
   scrollToAbout,
-  scrollToProjects,
   scrollToExperience,
+  scrollToResearch,
+  scrollToProjects,
   scrollToTools,
   scrollToService,
   scrollToContact,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef(null);
+
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        navRef.current,
+        { y: -15, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+        }
+      );
+    },
+    { scope: navRef }
+  );
+
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -24,7 +48,10 @@ const Navbar = ({
   const onExperienceClick = scrollToExperience || scrollToService;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-gray-900/85 backdrop-blur-md z-50 border-b border-gray-800 text-white transition-all">
+    <nav
+      ref={navRef}
+      className="fixed top-0 left-0 right-0 bg-gray-900/85 backdrop-blur-md z-50 border-b border-gray-800 text-white transition-all"
+    >
       <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3">
         <Link
           to={"/"}
@@ -34,7 +61,7 @@ const Navbar = ({
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-5 lg:space-x-7 text-xs sm:text-sm font-medium text-gray-300">
+        <div className="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs sm:text-sm font-medium text-gray-300">
           <button onClick={scrollToIntro} className="hover:text-sky-400 transition">
             Home
           </button>
@@ -44,6 +71,11 @@ const Navbar = ({
           <button onClick={onExperienceClick} className="hover:text-sky-400 transition">
             Experience
           </button>
+          {scrollToResearch && (
+            <button onClick={scrollToResearch} className="hover:text-sky-400 transition">
+              Research
+            </button>
+          )}
           <button onClick={scrollToProjects} className="hover:text-sky-400 transition">
             Projects
           </button>
@@ -86,6 +118,11 @@ const Navbar = ({
           <button onClick={() => handleNavClick(onExperienceClick)} className="text-left py-1 hover:text-sky-400">
             Experience
           </button>
+          {scrollToResearch && (
+            <button onClick={() => handleNavClick(scrollToResearch)} className="text-left py-1 hover:text-sky-400">
+              Research
+            </button>
+          )}
           <button onClick={() => handleNavClick(scrollToProjects)} className="text-left py-1 hover:text-sky-400">
             Projects
           </button>

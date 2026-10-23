@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   FaCalendarAlt,
   FaBriefcase,
@@ -6,6 +6,11 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { usePortfolio } from "../../context/PortfolioContext";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 // Rich fallback experience matching the user's career portfolio
 const defaultExperiences = [
@@ -157,6 +162,7 @@ const parseDatabaseCard = (card, index) => {
 const Experience = () => {
   const { service, serviceCards } = usePortfolio();
   const paragraph = service?.serviceParagraph || "";
+  const containerRef = useRef(null);
 
   // Determine whether to use database cards or rich fallback
   const experiences =
@@ -164,10 +170,57 @@ const Experience = () => {
       ? serviceCards.map(parseDatabaseCard)
       : defaultExperiences;
 
+  useGSAP(
+    () => {
+      // Header entrance
+      gsap.fromTo(
+        ".experience-header",
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // Individual cards reveal as they scroll into view
+      const cards = gsap.utils.toArray(".experience-card");
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            ease: "power2.out",
+            clearProps: "opacity,transform",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
+      });
+    },
+    { scope: containerRef, dependencies: [experiences] }
+  );
+
   return (
-    <section className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800">
+    <section
+      ref={containerRef}
+      className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+    >
       {/* Header */}
-      <div className="text-center mb-12 md:mb-16">
+      <div className="experience-header text-center mb-12 md:mb-16">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Career & Journey
         </span>
@@ -190,7 +243,7 @@ const Experience = () => {
         {experiences.map((exp, index) => (
           <div
             key={exp.id || index}
-            className="bg-[#0b1120]/90 backdrop-blur-md border border-gray-800 hover:border-sky-500/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-2xl transition-all duration-300 group"
+            className="experience-card bg-[#0b1120]/90 backdrop-blur-md border border-gray-800 hover:border-sky-500/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-2xl transition-all duration-300 group"
           >
             {/* Card Header: Role & Duration Badge */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">

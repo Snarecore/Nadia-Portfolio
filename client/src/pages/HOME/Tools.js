@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   SiFigma,
   SiAdobexd,
@@ -16,6 +16,11 @@ import {
   FaUsers,
   FaCode,
 } from "react-icons/fa";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 // Category 1: UI/UX & Design Tools
 const designTools = [
@@ -74,10 +79,76 @@ const technologies = [
 ];
 
 const Tools = () => {
+  const containerRef = useRef(null);
+
+  useGSAP(
+    () => {
+      // Header entrance
+      gsap.fromTo(
+        ".tools-header",
+        { opacity: 0, y: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // Categories cards entrance
+      gsap.fromTo(
+        ".tools-category-card",
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // Subtle stagger on individual tool items
+      gsap.fromTo(
+        ".tool-item-badge",
+        { opacity: 0, y: 12 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.45,
+          stagger: 0.025,
+          ease: "power2.out",
+          clearProps: "opacity,transform",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800">
+    <section
+      ref={containerRef}
+      className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+    >
       {/* Section Header */}
-      <div className="text-center mb-8 md:mb-12">
+      <div className="tools-header text-center mb-8 md:mb-12">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Tools & Stack
         </span>
@@ -92,7 +163,7 @@ const Tools = () => {
       {/* 2 Divs in One Line (Side by Side on desktop/laptop) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 xl:gap-8 items-stretch">
         {/* Div 1: UI/UX & Design Tools */}
-        <div className="bg-gray-900/60 backdrop-blur-md border border-gray-800 rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col items-center hover:border-sky-500/40 shadow-lg shadow-black/20 transition-all duration-300">
+        <div className="tools-category-card bg-gray-900/60 backdrop-blur-md border border-gray-800 rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col items-center hover:border-sky-500/40 shadow-lg shadow-black/20 transition-all duration-300">
           <div className="flex items-center justify-center gap-2 mb-4 sm:mb-5">
             <FaPaintBrush className="text-sky-400 text-xs sm:text-sm" />
             <h3 className="text-xs sm:text-sm md:text-base font-semibold text-sky-400 tracking-wider uppercase">
@@ -103,7 +174,7 @@ const Tools = () => {
             {designTools.map((tool, idx) => (
               <div
                 key={idx}
-                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-[68px] lg:h-[68px] xl:w-20 xl:h-20 2xl:w-[86px] 2xl:h-[86px] rounded-xl sm:rounded-2xl bg-gray-900/90 border border-gray-800 hover:border-sky-500/60 hover:bg-gray-850 shadow-md hover:shadow-xl hover:shadow-sky-500/15 flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                className="tool-item-badge w-16 h-16 sm:w-20 sm:h-20 lg:w-[68px] lg:h-[68px] xl:w-20 xl:h-20 2xl:w-[86px] 2xl:h-[86px] rounded-xl sm:rounded-2xl bg-gray-900/90 border border-gray-800 hover:border-sky-500/60 hover:bg-gray-850 shadow-md hover:shadow-xl hover:shadow-sky-500/15 flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
               >
                 <div className="text-xl sm:text-2xl xl:text-3xl group-hover:scale-110 transition-transform duration-300">
                   {tool.icon}
@@ -117,7 +188,7 @@ const Tools = () => {
         </div>
 
         {/* Div 2: Technologies I Use */}
-        <div className="bg-gray-900/60 backdrop-blur-md border border-gray-800 rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col items-center hover:border-sky-500/40 shadow-lg shadow-black/20 transition-all duration-300">
+        <div className="tools-category-card bg-gray-900/60 backdrop-blur-md border border-gray-800 rounded-2xl p-4 sm:p-5 md:p-6 flex flex-col items-center hover:border-sky-500/40 shadow-lg shadow-black/20 transition-all duration-300">
           <div className="flex items-center justify-center gap-2 mb-4 sm:mb-5">
             <FaCode className="text-sky-400 text-xs sm:text-sm" />
             <h3 className="text-xs sm:text-sm md:text-base font-semibold text-sky-400 tracking-wider uppercase">
@@ -128,7 +199,7 @@ const Tools = () => {
             {technologies.map((tech, idx) => (
               <div
                 key={idx}
-                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-[68px] lg:h-[68px] xl:w-20 xl:h-20 2xl:w-[86px] 2xl:h-[86px] rounded-xl sm:rounded-2xl bg-gray-900/90 border border-gray-800 hover:border-sky-500/60 hover:bg-gray-850 shadow-md hover:shadow-xl hover:shadow-sky-500/15 flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                className="tool-item-badge w-16 h-16 sm:w-20 sm:h-20 lg:w-[68px] lg:h-[68px] xl:w-20 xl:h-20 2xl:w-[86px] 2xl:h-[86px] rounded-xl sm:rounded-2xl bg-gray-900/90 border border-gray-800 hover:border-sky-500/60 hover:bg-gray-850 shadow-md hover:shadow-xl hover:shadow-sky-500/15 flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
               >
                 <div className="text-xl sm:text-2xl xl:text-3xl group-hover:scale-110 transition-transform duration-300">
                   {tech.icon}

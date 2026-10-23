@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import API from "../api/apiClient";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const PortfolioContext = createContext(null);
 
@@ -58,6 +59,9 @@ export const PortfolioProvider = ({ children }) => {
       console.error("Error fetching portfolio context data:", error);
     } finally {
       setLoading(false);
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
     }
   }, []);
 

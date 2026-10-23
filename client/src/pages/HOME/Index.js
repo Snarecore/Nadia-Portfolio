@@ -4,6 +4,7 @@ import Navbar from "../../components/NAVBAR/Navbar";
 import Intro from "./Intro";
 import About from "./About";
 import Experience from "./Experience";
+import Research from "./Research";
 import Projects from "./Projects";
 import Tools from "./Tools";
 import Contact from "./Contact";
@@ -13,6 +14,7 @@ const Index = () => {
   const introRef = useRef(null);
   const aboutRef = useRef(null);
   const experienceRef = useRef(null);
+  const researchRef = useRef(null);
   const projectsRef = useRef(null);
   const toolsRef = useRef(null);
   const contactRef = useRef(null);
@@ -23,6 +25,8 @@ const Index = () => {
     aboutRef.current.scrollIntoView({ behavior: "smooth" });
   const scrollToExperience = () =>
     experienceRef.current.scrollIntoView({ behavior: "smooth" });
+  const scrollToResearch = () =>
+    researchRef.current.scrollIntoView({ behavior: "smooth" });
   const scrollToProjects = () =>
     projectsRef.current.scrollIntoView({ behavior: "smooth" });
   const scrollToTools = () =>
@@ -36,6 +40,7 @@ const Index = () => {
         scrollToIntro={scrollToIntro}
         scrollToAbout={scrollToAbout}
         scrollToExperience={scrollToExperience}
+        scrollToResearch={scrollToResearch}
         scrollToProjects={scrollToProjects}
         scrollToTools={scrollToTools}
         scrollToContact={scrollToContact}
@@ -49,6 +54,9 @@ const Index = () => {
         </div>
         <div ref={experienceRef}>
           <Experience />
+        </div>
+        <div ref={researchRef}>
+          <Research />
         </div>
         <div ref={projectsRef}>
           <Projects />
