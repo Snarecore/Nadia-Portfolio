@@ -13,7 +13,8 @@ const Intro = () => {
 
   const profileImg =
     intro?.profileImage || "https://i.ibb.co.com/VW9XQ7Z2/portfolio-image.jpg";
-  const CV = intro?.cv || "";
+  const defaultCV = `${process.env.PUBLIC_URL || ""}/Nadia_Esrat_Ifti_Sowa.pdf`;
+  const CV = intro?.cv && intro.cv.trim() !== "" ? intro.cv : defaultCV;
   const name = intro?.name || "Nadia Esrat Ifti Sowa";
   const paragraph =
     intro?.paragraph ||
@@ -108,9 +109,8 @@ const Intro = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="intro-action-item inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-4 py-2 rounded-lg transition duration-200"
-                download
               >
-                Download CV
+                <span>Download CV</span>
                 <MdOutlineFileDownload className="text-base" />
               </a>
             ) : null}
