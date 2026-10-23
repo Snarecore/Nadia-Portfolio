@@ -76,10 +76,10 @@ const Research = () => {
   return (
     <section
       ref={containerRef}
-      className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+      className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
     >
       {/* Section Header */}
-      <div className="research-header text-center mb-10 md:mb-14">
+      <div className="research-header text-center mb-6 md:mb-9">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Academic Scholarship & Scientific Publications
         </span>
@@ -92,14 +92,11 @@ const Research = () => {
       </div>
 
       {/* Main Publication Showcase Card */}
-      <div className="research-card relative bg-[#0b1120]/90 backdrop-blur-md border border-gray-800 hover:border-sky-500/50 rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300 group">
-        {/* Top Highlight Line / Glow */}
-        <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-sky-500/60 to-transparent pointer-events-none" />
-
+      <div className="research-card relative bg-[#0b1120]/90 border border-gray-800 hover:border-gray-700 rounded-2xl p-6 sm:p-8 md:p-9 shadow-md transition-colors duration-200">
         {/* Header Metadata Bar */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-5 border-b border-gray-800/80">
           <div className="flex items-center gap-2.5">
-            <div className="p-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20 text-[#FF6C37] shadow-sm">
+            <div className="p-2 rounded-lg bg-orange-500/10 text-[#FF6C37]">
               <SiElsevier className="text-xl sm:text-2xl" />
             </div>
             <div>
@@ -114,14 +111,14 @@ const Research = () => {
 
           {/* Prestige Metrics Badges */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="research-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 shadow-sm">
+            <span className="research-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
               <FaAward className="text-xs" />
               Q1 Journal
             </span>
-            <span className="research-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/15 border border-sky-500/30 text-sky-400 shadow-sm">
+            <span className="research-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/15 border border-sky-500/30 text-sky-400">
               Impact Factor: 5.6
             </span>
-            <span className="research-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 border border-amber-500/30 text-amber-400 shadow-sm">
+            <span className="research-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/15 border border-amber-500/30 text-amber-400">
               CiteScore: 16.1
             </span>
           </div>
@@ -129,12 +126,12 @@ const Research = () => {
 
         {/* Paper Title */}
         <div className="mb-4">
-          <h3 className="text-lg sm:text-xl md:text-2xl font-extrabold text-white group-hover:text-sky-300 transition-colors duration-200 leading-snug">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-snug">
             <a
               href={paperLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:underline"
+              className="hover:text-sky-400 hover:underline transition-colors duration-150"
             >
               Submerge Sentinel: An Energy Efficient Way for Securing Underwater Wireless Communication with Blockchain-Powered Data Security
             </a>
@@ -146,18 +143,18 @@ const Research = () => {
           <span className="text-gray-500 font-medium">Authors:</span>
           <span>Shahriar Ahsan Taisiq,</span>
           <span>Shagor Kumar Das,</span>
-          <span className="font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded-md border border-sky-500/30">
+          <span className="font-semibold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/30">
             Nadia Esrat Ifti Sowa
           </span>
           <span>, Md. Jahidul Islam</span>
         </div>
 
         {/* Key Highlights / Bullets from User's Research */}
-        <div className="space-y-3 mb-6 bg-gray-900/70 border border-gray-800/80 rounded-xl p-4 sm:p-5">
+        <div className="space-y-3 mb-6 bg-gray-900/60 border border-gray-800/80 rounded-xl p-4 sm:p-5">
           <div className="flex items-start gap-3">
             <FaCheckCircle className="text-emerald-400 text-sm mt-0.5 flex-shrink-0" />
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              Published as a research article in <strong className="text-white">Elsevier: Blockchain: Research and Applications</strong> (<span className="text-emerald-400 font-semibold">Q1 Journal</span>, Impact Factor: <span className="text-sky-400 font-semibold">5.6</span>, CiteScore: <span className="text-amber-400 font-semibold">16.1</span>).
+              Published as a research article in <strong className="text-white">Elsevier: Blockchain: Research and Applications</strong> (<span className="text-emerald-400 font-medium">Q1 Journal</span>, Impact Factor: <span className="text-sky-400 font-medium">5.6</span>, CiteScore: <span className="text-amber-400 font-medium">16.1</span>).
             </p>
           </div>
 
@@ -182,7 +179,7 @@ const Research = () => {
             ].map((tag, idx) => (
               <span
                 key={idx}
-                className="text-[11px] font-medium text-gray-400 bg-gray-800/80 px-2.5 py-1 rounded-lg border border-gray-700/60"
+                className="text-[11px] font-medium text-gray-400 bg-gray-800/60 px-2.5 py-1 rounded-md border border-gray-800"
               >
                 {tag}
               </span>
@@ -195,11 +192,11 @@ const Research = () => {
               href={paperLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold border border-sky-500 bg-sky-500/10 text-sky-400 hover:bg-sky-600 hover:text-white px-5 py-2.5 rounded-xl transition duration-200 shadow-lg shadow-sky-500/10 group/btn"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-4 py-2 rounded-lg transition-colors duration-150"
             >
-              <FaBookOpen className="text-sm" />
+              <FaBookOpen className="text-xs" />
               <span>Read on ScienceDirect</span>
-              <FaArrowUpRightFromSquare className="text-xs group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              <FaArrowUpRightFromSquare className="text-[11px]" />
             </a>
           </div>
         </div>

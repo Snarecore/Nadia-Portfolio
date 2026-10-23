@@ -12,82 +12,66 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-// Rich fallback experience matching the user's career portfolio
+// Authentic default experiences matching user's real career history
 const defaultExperiences = [
   {
-    role: "Jr. Software Engineer",
-    company: "Qligence Limited",
-    location: "Dhanmondi, Dhaka",
-    duration: "February 2025 – Present",
+    role: "UI/UX Designer (Product Design)",
+    company: "Moni Trading Corporation",
+    location: "Dhaka, Bangladesh",
+    duration: "May 2026 – Present",
     points: [
       {
-        icon: "🛒",
-        text: "Developed an e-commerce website for users and sellers with real-time notifications.",
+        icon: null,
+        text: "Designed user-friendly UI layouts and product interfaces using Figma.",
       },
       {
-        icon: "🔌",
-        text: "Integrated RESTful APIs for dynamic data fetching and updates.",
+        icon: null,
+        text: "Created clean, high-quality product visuals to improve brand presentation and online product displays.",
       },
       {
-        icon: "⚛️",
-        text: "Built reusable React components and implemented state management with Redux.",
-      },
-      {
-        icon: "👥",
-        text: "Applied Agile methodology for rapid feature delivery and collaboration.",
-      },
-      {
-        icon: "📱",
-        text: "Designed mobile-first responsive user interfaces using Figma.",
+        icon: null,
+        text: "Improved user experience through consistent design systems, visual hierarchy, and responsive layouts.",
       },
     ],
-    skills: ["React", "Zustand", "REST APIs", "Figma", "Agile"],
+    skills: ["Figma", "Product Design", "Design Systems", "Visual Hierarchy", "Responsive Layouts"],
   },
   {
-    role: "MERN Stack Developer",
-    company: "Code Prophet",
-    location: "Nirala, Khulna",
-    duration: "July 2024 – December 2024",
+    role: "Junior UI/UX Designer",
+    company: "L2N Software Limited",
+    location: "Dhaka, Bangladesh",
+    duration: "Oct 2025 – Apr 2026",
     points: [
       {
-        icon: "🛒",
-        text: "Contributed to healthcare and society management web applications.",
+        icon: null,
+        text: "Designed clean, user-friendly, and responsive interfaces by focusing on user experience, accessibility, and modern design principles.",
       },
       {
-        icon: "⚡",
-        text: "Architected scalable backend microservices using Node.js, Express, and MongoDB.",
+        icon: null,
+        text: "Developed high-fidelity wireframes and prototypes to improve usability and streamline the user journey for web applications.",
       },
       {
-        icon: "🔒",
-        text: "Implemented secure JWT authentication and role-based access control (RBAC).",
-      },
-      {
-        icon: "🚀",
-        text: "Optimized database queries and API response times for high-volume endpoints.",
+        icon: null,
+        text: "Collaborated with development teams to ensure design consistency and technical feasibility across various digital platforms.",
       },
     ],
-    skills: ["Node.js", "Express", "MongoDB", "React", "JWT"],
+    skills: ["Wireframing", "Prototyping", "Accessibility", "User Experience", "Cross-Platform"],
   },
   {
-    role: "Frontend Developer / Intern",
-    company: "Tech Innovators Lab",
-    location: "Remote, Bangladesh",
-    duration: "January 2024 – June 2024",
+    role: "Front-End Developer (Intern)",
+    company: "Shoveler Info Tech",
+    location: "Dhaka, Bangladesh",
+    duration: "Oct 2023 – Mar 2024",
     points: [
       {
-        icon: "💻",
-        text: "Engineered responsive, accessible web interfaces utilizing Tailwind CSS and React.js.",
+        icon: null,
+        text: "Collaborated with senior front-end developers to solve practical problems and implement UI components for various client projects.",
       },
       {
-        icon: "🎯",
-        text: "Collaborated on component libraries and reusable UI design systems.",
-      },
-      {
-        icon: "📈",
-        text: "Audited Core Web Vitals and reduced initial bundle load times by 35%.",
+        icon: null,
+        text: "Gained hands-on experience in building responsive web layouts and ensuring cross-browser compatibility.",
       },
     ],
-    skills: ["React.js", "Tailwind CSS", "JavaScript", "Git"],
+    skills: ["Frontend Development", "UI Components", "Responsive Layouts", "Cross-Browser Compatibility"],
   },
 ];
 
@@ -217,10 +201,10 @@ const Experience = () => {
   return (
     <section
       ref={containerRef}
-      className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+      className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
     >
       {/* Header */}
-      <div className="experience-header text-center mb-12 md:mb-16">
+      <div className="experience-header text-center mb-8 md:mb-10">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Career & Journey
         </span>
@@ -239,50 +223,50 @@ const Experience = () => {
       </div>
 
       {/* Experience Cards List aligned with Navbar */}
-      <div className="w-full space-y-8 md:space-y-10">
+      <div className="w-full space-y-4 sm:space-y-5">
         {experiences.map((exp, index) => (
           <div
             key={exp.id || index}
-            className="experience-card bg-[#0b1120]/90 backdrop-blur-md border border-gray-800 hover:border-sky-500/40 rounded-2xl p-5 sm:p-7 md:p-8 shadow-2xl transition-all duration-300 group"
+            className="experience-card bg-[#0b1120]/85 border border-gray-800 hover:border-gray-700 rounded-xl p-4 sm:p-5 md:p-6 shadow-md transition-colors duration-200"
           >
             {/* Card Header: Role & Duration Badge */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
               <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-sky-300 transition">
+                <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
                   {exp.role}
                 </h3>
-                <div className="flex flex-wrap items-center gap-2.5 mt-1.5 text-xs sm:text-sm">
+                <div className="flex flex-wrap items-center gap-2 mt-1 text-xs sm:text-sm">
                   {exp.company && (
                     <span className="text-sky-400 font-semibold tracking-wide">
                       {exp.company}
                     </span>
                   )}
                   {exp.location && (
-                    <span className="text-gray-400 flex items-center gap-1 font-medium">
-                      <FaMapMarkerAlt className="text-red-400 text-xs" />
+                    <span className="text-gray-400 flex items-center gap-1 font-medium text-xs">
+                      <FaMapMarkerAlt className="text-red-400 text-[10px]" />
                       {exp.location}
                     </span>
                   )}
                 </div>
               </div>
 
-              {/* Duration Badge with Sky Blue theme */}
+              {/* Duration Badge */}
               {exp.duration && (
-                <div className="self-start sm:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-semibold shadow-sm">
-                  <FaCalendarAlt className="text-sky-400 text-xs" />
+                <div className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 text-sky-400 text-xs font-medium">
+                  <FaCalendarAlt className="text-[11px]" />
                   <span>{exp.duration}</span>
-                  <FaBriefcase className="text-sky-400 text-xs ml-0.5" />
+                  <FaBriefcase className="text-[10px] ml-0.5" />
                 </div>
               )}
             </div>
 
             {/* Responsibilities Bullets as individual strip pills */}
-            <div className="space-y-2.5 my-5">
+            <div className="space-y-2 my-3">
               {exp.points &&
                 exp.points.map((point, pIdx) => (
                   <div
                     key={pIdx}
-                    className="flex items-start gap-3 px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-800/80 hover:border-sky-500/30 hover:bg-gray-800/50 transition-all text-xs sm:text-sm text-gray-300"
+                    className="flex items-start gap-2.5 px-3.5 py-2 rounded-lg bg-gray-900/60 border border-gray-800/80 text-xs sm:text-sm text-gray-300"
                   >
                     <span className="text-sm flex-shrink-0 mt-0.5">
                       {point.icon || (
@@ -298,11 +282,11 @@ const Experience = () => {
 
             {/* Tech Stack Pills in Primary Sky Theme */}
             {exp.skills && exp.skills.length > 0 && (
-              <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-gray-800/80">
+              <div className="flex flex-wrap items-center gap-1.5 pt-2.5 border-t border-gray-800/80">
                 {exp.skills.map((skill, sIdx) => (
                   <span
                     key={sIdx}
-                    className="px-3.5 py-1 rounded-full text-xs font-medium bg-sky-500/10 border border-sky-500/25 text-sky-300 hover:bg-sky-500/20 hover:text-white transition duration-200"
+                    className="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-gray-900 text-gray-400 border border-gray-800"
                   >
                     {skill}
                   </span>

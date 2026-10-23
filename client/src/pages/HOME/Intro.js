@@ -94,7 +94,7 @@ const Intro = () => {
             {name || "Your Name"}
           </h1>
           <p className="intro-desc text-xs sm:text-sm md:text-base text-gray-300 max-w-xl leading-relaxed mb-5 mx-auto md:mx-0">
-            {paragraph || "Full stack web developer passionate about crafting robust, scalable digital experiences."}
+            {paragraph || "UI/UX Designer with a Computer Science background. I design clean, functional digital experiences with a solid understanding of frontend code and research-driven thinking."}
           </p>
 
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-1">

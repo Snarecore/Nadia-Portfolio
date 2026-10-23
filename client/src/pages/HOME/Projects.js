@@ -13,7 +13,7 @@ const ProjectCard = ({ project, projectNum }) => {
   const targetLink = project.projectLiveLink || project.projectGithubLink || null;
 
   return (
-    <div className="group relative bg-gray-900/85 backdrop-blur-sm border border-gray-800 hover:border-sky-500/60 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-300">
+    <div className="relative bg-gray-900/85 border border-gray-800 hover:border-gray-700 rounded-2xl overflow-hidden shadow-md transition-colors duration-200">
       {/* Project Image Preview (Fitted height without dead space) */}
       {project.projectImage ? (
         <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-950 border-b border-gray-800/80">
@@ -27,14 +27,14 @@ const ProjectCard = ({ project, projectNum }) => {
               <img
                 src={project.projectImage}
                 alt={project.projectTitle || "Project Preview"}
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-top opacity-95 hover:opacity-100 transition-opacity duration-200"
               />
             </a>
           ) : (
             <img
               src={project.projectImage}
               alt={project.projectTitle || "Project Preview"}
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover object-top opacity-95"
             />
           )}
         </div>
@@ -46,15 +46,15 @@ const ProjectCard = ({ project, projectNum }) => {
       )}
 
       {/* Card Content (Tight, clean padding and minimal gaps) */}
-      <div className="px-4 pt-1.5 pb-2.5 sm:px-4.5 sm:pt-1.5 sm:pb-3 space-y-1.5">
+      <div className="px-4 pt-2 pb-3 sm:px-5 sm:pt-2 sm:pb-3.5 space-y-1.5">
         <div className="flex items-center justify-between">
-          <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-sky-400 transition tracking-tight">
+          <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
             {targetLink ? (
               <a
                 href={targetLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline"
+                className="hover:text-sky-400 hover:underline transition-colors duration-150"
               >
                 {project.projectTitle || "Featured Project"}
               </a>
@@ -66,17 +66,17 @@ const ProjectCard = ({ project, projectNum }) => {
 
         <p className="text-xs text-gray-300 leading-normal line-clamp-2">
           {project.projectParagraph ||
-            "Full-stack web application designed for high performance, modern user interface, and clean architecture."}
+            "Web application designed for clean user interface, seamless interaction, and robust architecture."}
         </p>
 
         {/* Action Buttons styled consistently with the rest of the portfolio */}
-        <div className="flex flex-wrap items-center gap-2.5 pt-0.5">
+        <div className="flex flex-wrap items-center gap-2.5 pt-1">
           {project.projectLiveLink && (
             <a
               href={project.projectLiveLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-3.5 py-1.5 rounded-lg transition duration-200"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold border border-sky-500 text-sky-400 hover:bg-sky-600 hover:text-white px-3.5 py-1.5 rounded-lg transition duration-150"
             >
               <span>Live Demo</span>
               <FaArrowUpRightFromSquare className="text-xs" />
@@ -88,7 +88,7 @@ const ProjectCard = ({ project, projectNum }) => {
               href={project.projectGithubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold border border-gray-700 bg-gray-800/80 hover:border-sky-500 hover:text-sky-400 text-gray-300 px-3.5 py-1.5 rounded-lg transition duration-200"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold border border-gray-700 bg-gray-800/80 hover:border-gray-600 hover:text-white text-gray-300 px-3.5 py-1.5 rounded-lg transition duration-150"
             >
               <BsGithub className="text-xs" />
               <span>Source Code</span>
@@ -176,10 +176,10 @@ const Projects = () => {
   return (
     <section
       ref={containerRef}
-      className="py-14 md:py-20 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
+      className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto border-t border-gray-800"
     >
       {/* Header */}
-      <div className="projects-header text-center mb-12 md:mb-16">
+      <div className="projects-header text-center mb-8 md:mb-10">
         <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1.5">
           Recent Works
         </span>
@@ -213,7 +213,7 @@ const Projects = () => {
                 >
                   {/* Step / Number Badge Node on the Spine */}
                   <div className="project-badge-node absolute left-5 md:left-1/2 top-6 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 z-20">
-                    <div className="w-10 h-10 rounded-xl bg-gray-900 border-2 border-sky-500 shadow-lg shadow-sky-500/30 flex items-center justify-center text-sky-400 font-mono font-bold text-xs ring-4 ring-gray-900 group-hover:scale-110 transition">
+                    <div className="w-10 h-10 rounded-xl bg-gray-900 border-2 border-sky-500 shadow-md flex items-center justify-center text-sky-400 font-mono font-bold text-xs ring-4 ring-gray-900">
                       {projectNum}
                     </div>
 
