@@ -15,11 +15,13 @@ import EditProjectInfo from "./pages/ADMIN/EditProjectInfo";
 import EditAbout from "./pages/ADMIN/EditAbout";
 import AdminLogin from "./pages/ADMIN/AdminLogin";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CustomCursor from "./components/CustomCursor";
 import { PortfolioProvider } from "./context/PortfolioContext";
 
 function App() {
   return (
     <PortfolioProvider>
+      <CustomCursor />
       <Router>
         <Routes>
           {/* Public Portfolio Route */}
