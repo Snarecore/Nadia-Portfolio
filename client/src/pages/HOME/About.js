@@ -11,6 +11,7 @@ import {
   FaGraduationCap,
   FaAward,
 } from "react-icons/fa";
+import { SiFigma } from "react-icons/si";
 import { usePortfolio } from "../../context/PortfolioContext";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -89,36 +90,52 @@ const About = () => {
   return (
     <section
       ref={containerRef}
-      className="py-8 md:py-10 bg-gray-900/60 border-t border-gray-800"
+      className="py-10 md:py-14 bg-gray-900/60 border-t border-gray-800"
     >
       <div className="max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          {/* Left Column: Profile Card, Bio & Highlights */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          
+          {/* Left Column: Eye-Catching Designer Profile Card, Bio & Pillars */}
           <div className="about-left-col lg:col-span-5 space-y-4 text-center md:text-left">
             {profilePhoto && (
-              <div className="mb-3 flex justify-center md:justify-start">
-                <div className="relative rounded-2xl overflow-hidden border border-gray-700/80 shadow-2xl bg-gray-900 max-w-[220px] sm:max-w-[250px]">
-                  <img
-                    src={profilePhoto}
-                    alt={aboutInfo?.aboutDesignation || "Profile"}
-                    className="w-full h-auto object-cover block"
-                  />
-                  <div className="absolute bottom-2 left-2 right-2 bg-gray-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-gray-700/50 text-[11px] font-medium text-sky-400 text-center">
-                    Product &amp; Interaction Design
+              <div className="mb-4 flex justify-center md:justify-start">
+                <div className="relative group">
+                  {/* Subtle Ambient Radial Glow */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-sky-500/20 to-blue-600/20 rounded-2xl blur-lg opacity-70 group-hover:opacity-100 transition duration-300"></div>
+
+                  <div className="relative rounded-2xl overflow-hidden border border-gray-700/80 shadow-2xl bg-gray-900 max-w-[220px] sm:max-w-[250px]">
+                    <img
+                      src={profilePhoto}
+                      alt={aboutInfo?.aboutDesignation || "Profile"}
+                      className="w-full h-auto object-cover block"
+                    />
+                    
+                    {/* Live Status Pill with pulsating indicator */}
+                    <div className="absolute bottom-2 left-2 right-2 bg-gray-950/85 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-gray-700/60 flex items-center justify-center gap-2 shadow-lg">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      <span className="text-[11px] font-semibold text-gray-200 tracking-wide">
+                        Available for Projects
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
 
+            {/* Editorial Heading Hook */}
             <div>
               <span className="text-xs uppercase tracking-widest text-sky-400 font-semibold block mb-1">
                 About Me
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                {aboutInfo?.aboutDesignation || "UI/UX Designer"}
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
+                Designing with <span className="text-sky-400">Code &amp; Research</span>
               </h2>
             </div>
 
+            {/* Breathable 2-Paragraph Bio */}
             <div className="space-y-2 text-xs sm:text-sm text-gray-300 leading-relaxed">
               <p>
                 I design clean, functional, and user-friendly digital products. With a background in Computer Science &amp; Engineering, I bridge the gap between design and engineering - understanding code helps me create interfaces that are intuitive for users and practical for developers to build.
@@ -128,30 +145,41 @@ const About = () => {
               </p>
             </div>
 
-            {/* Quick Highlight Cards */}
-            <div className="grid grid-cols-3 gap-2.5 pt-2">
-              <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-center shadow-sm hover:border-gray-700 transition">
-                <span className="text-xs sm:text-sm font-bold text-white block">
+            {/* 3 Core Designer Pillar Cards with Micro-Icons */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-2.5 pt-2">
+              <div className="p-3 rounded-xl bg-gray-850/80 border border-gray-800 hover:border-sky-500/40 text-center transition-all duration-200 group">
+                <div className="w-7 h-7 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center mx-auto mb-1.5 text-xs">
+                  <FaAward />
+                </div>
+                <span className="text-xs font-bold text-white block">
                   Q1 Elsevier
                 </span>
                 <span className="text-[10px] text-sky-400 font-medium block mt-0.5">
                   Published Paper
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-center shadow-sm hover:border-gray-700 transition">
-                <span className="text-xs sm:text-sm font-bold text-white block">
-                  Figma Systems
+
+              <div className="p-3 rounded-xl bg-gray-850/80 border border-gray-800 hover:border-sky-500/40 text-center transition-all duration-200 group">
+                <div className="w-7 h-7 rounded-lg bg-[#F24E1E]/10 border border-[#F24E1E]/20 text-[#F24E1E] flex items-center justify-center mx-auto mb-1.5 text-xs">
+                  <SiFigma />
+                </div>
+                <span className="text-xs font-bold text-white block">
+                  Design Systems
                 </span>
                 <span className="text-[10px] text-sky-400 font-medium block mt-0.5">
-                  Design &amp; Prototype
+                  Figma &amp; Prototyping
                 </span>
               </div>
-              <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-center shadow-sm hover:border-gray-700 transition">
-                <span className="text-xs sm:text-sm font-bold text-white block">
+
+              <div className="p-3 rounded-xl bg-gray-850/80 border border-gray-800 hover:border-sky-500/40 text-center transition-all duration-200 group">
+                <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mx-auto mb-1.5 text-xs">
+                  <FaGraduationCap />
+                </div>
+                <span className="text-xs font-bold text-white block">
                   B.Sc. Degree
                 </span>
                 <span className="text-[10px] text-sky-400 font-medium block mt-0.5 leading-tight">
-                  Computer Science &amp; Engineering
+                  Computer Science &amp; Eng.
                 </span>
               </div>
             </div>
@@ -159,8 +187,8 @@ const About = () => {
 
           {/* Right Column: Interactive Tabs with Engaging Structured Cards */}
           <div className="about-right-col lg:col-span-7 bg-gray-900/85 backdrop-blur-sm border border-gray-800 rounded-2xl p-5 sm:p-6 shadow-xl">
-            {/* Interactive Tab Pills */}
-            <div className="flex justify-center md:justify-start gap-1.5 sm:gap-2 mb-4 border-b border-gray-800 pb-3 flex-wrap">
+            {/* Interactive Tab Switcher */}
+            <div className="flex justify-center md:justify-start gap-1.5 sm:gap-2 mb-5 border-b border-gray-800 pb-3 flex-wrap">
               {[
                 { id: "skills", label: "Skills" },
                 { id: "experience", label: "Experience" },
@@ -183,65 +211,65 @@ const About = () => {
 
             {/* Tab Contents */}
             <div className="about-tab-content text-xs sm:text-sm text-gray-300">
-              {/* Tab 1: Structured Visual Skills Grid (Engaging, Not Boring Text) */}
+              {/* Tab 1: Skills & Competencies */}
               {visibleSection === "skills" && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <div className="p-3 rounded-xl bg-gray-850/60 border border-gray-800 text-left">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="p-3.5 rounded-xl bg-gray-850/60 border border-gray-800 text-left hover:border-gray-700 transition">
                     <div className="flex items-center gap-2 mb-1 text-sky-400">
                       <FaPalette className="text-xs" />
-                      <h4 className="text-xs font-bold text-white tracking-wide">UI/UX & Wireframing</h4>
+                      <h4 className="text-xs font-bold text-white tracking-wide">UI/UX &amp; Wireframing</h4>
                     </div>
-                    <p className="text-[11px] text-gray-400">
-                      Figma, Adobe XD, Wireframes, Low & High-Fidelity Mockups
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
+                      Figma, Adobe XD, Wireframes, Low &amp; High-Fidelity Interactive Mockups
                     </p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-gray-850/60 border border-gray-800 text-left">
+                  <div className="p-3.5 rounded-xl bg-gray-850/60 border border-gray-800 text-left hover:border-gray-700 transition">
                     <div className="flex items-center gap-2 mb-1 text-emerald-400">
                       <FaUsers className="text-xs" />
-                      <h4 className="text-xs font-bold text-white tracking-wide">User Research & Testing</h4>
+                      <h4 className="text-xs font-bold text-white tracking-wide">User Research &amp; Testing</h4>
                     </div>
-                    <p className="text-[11px] text-gray-400">
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
                       User Research, Usability Testing, Interaction Design, User Flows
                     </p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-gray-850/60 border border-gray-800 text-left">
+                  <div className="p-3.5 rounded-xl bg-gray-850/60 border border-gray-800 text-left hover:border-gray-700 transition">
                     <div className="flex items-center gap-2 mb-1 text-amber-400">
                       <FaLayerGroup className="text-xs" />
-                      <h4 className="text-xs font-bold text-white tracking-wide">Visual & Design Systems</h4>
+                      <h4 className="text-xs font-bold text-white tracking-wide">Visual &amp; Design Systems</h4>
                     </div>
-                    <p className="text-[11px] text-gray-400">
-                      Typography, Color Theory, Component Libraries, Guidelines
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
+                      Typography, Color Theory, Component Libraries, Scalable Guidelines
                     </p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-gray-850/60 border border-gray-800 text-left">
+                  <div className="p-3.5 rounded-xl bg-gray-850/60 border border-gray-800 text-left hover:border-gray-700 transition">
                     <div className="flex items-center gap-2 mb-1 text-purple-400">
                       <FaCube className="text-xs" />
                       <h4 className="text-xs font-bold text-white tracking-wide">Core CS Concepts</h4>
                     </div>
-                    <p className="text-[11px] text-gray-400">
-                      Object-Oriented Programming (OOP) & Computing Principles
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
+                      Object-Oriented Programming (OOP) &amp; Computing Principles
                     </p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-gray-850/60 border border-gray-800 text-left">
+                  <div className="p-3.5 rounded-xl bg-gray-850/60 border border-gray-800 text-left hover:border-gray-700 transition">
                     <div className="flex items-center gap-2 mb-1 text-cyan-400">
                       <FaCode className="text-xs" />
                       <h4 className="text-xs font-bold text-white tracking-wide">Frontend Development</h4>
                     </div>
-                    <p className="text-[11px] text-gray-400">
-                      React.js, Tailwind CSS, Modern JavaScript (ES6+)
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
+                      React.js, Tailwind CSS, Modern JavaScript (ES6+), Responsive DOM
                     </p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-gray-850/60 border border-gray-800 text-left">
+                  <div className="p-3.5 rounded-xl bg-gray-850/60 border border-gray-800 text-left hover:border-gray-700 transition">
                     <div className="flex items-center gap-2 mb-1 text-indigo-400">
                       <FaDatabase className="text-xs" />
-                      <h4 className="text-xs font-bold text-white tracking-wide">Data & Foundations</h4>
+                      <h4 className="text-xs font-bold text-white tracking-wide">Data &amp; Foundations</h4>
                     </div>
-                    <p className="text-[11px] text-gray-400">
+                    <p className="text-[11px] text-gray-400 leading-relaxed">
                       Python, C Language, MySQL, Database Architecture
                     </p>
                   </div>
@@ -255,10 +283,10 @@ const About = () => {
                     <div className="flex items-center justify-between mb-1.5 flex-wrap gap-1">
                       <div className="flex items-center gap-2">
                         <FaBriefcase className="text-sky-400 text-xs" />
-                        <h4 className="font-bold text-white text-sm">UI/UX & Product Design</h4>
+                        <h4 className="font-bold text-white text-sm">UI/UX &amp; Product Design</h4>
                       </div>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-sky-500/15 text-sky-400 font-semibold border border-sky-500/30">
-                        Design & Engineering
+                        Design &amp; Engineering
                       </span>
                     </div>
                     <p className="text-xs text-gray-300 leading-relaxed mt-1">
@@ -340,6 +368,7 @@ const About = () => {
               )}
             </div>
           </div>
+
         </div>
       </div>
     </section>
