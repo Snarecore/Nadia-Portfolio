@@ -13,7 +13,7 @@ const ProjectCard = ({ project, projectNum }) => {
   const targetLink = project.projectLiveLink || project.projectGithubLink || null;
 
   return (
-    <div className="relative bg-gray-900/85 border border-gray-800 hover:border-gray-700 rounded-2xl overflow-hidden shadow-md transition-colors duration-200">
+    <div className="group relative bg-gray-900/90 border border-gray-800 hover:border-sky-500/40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:shadow-sky-500/5 hover:-translate-y-1 transition-all duration-300">
       {/* Project Image Preview (Fitted height without dead space) */}
       {project.projectImage ? (
         <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-950 border-b border-gray-800/80">
@@ -27,14 +27,14 @@ const ProjectCard = ({ project, projectNum }) => {
               <img
                 src={project.projectImage}
                 alt={project.projectTitle || "Project Preview"}
-                className="w-full h-full object-cover object-top opacity-95 hover:opacity-100 transition-opacity duration-200"
+                className="w-full h-full object-cover object-top opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-300"
               />
             </a>
           ) : (
             <img
               src={project.projectImage}
               alt={project.projectTitle || "Project Preview"}
-              className="w-full h-full object-cover object-top opacity-95"
+              className="w-full h-full object-cover object-top opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-300"
             />
           )}
         </div>
@@ -139,16 +139,32 @@ const Projects = () => {
       // Header entrance
       gsap.fromTo(
         ".projects-header",
-        { opacity: 0, y: 18 },
+        { opacity: 0, y: 26 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          ease: "power2.out",
+          duration: 0.7,
+          ease: "power3.out",
           clearProps: "opacity,transform",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 85%",
+            once: true,
+          },
+        }
+      );
+
+      // Spine drawing animation
+      gsap.fromTo(
+        ".project-timeline-spine",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
             once: true,
           },
         }
@@ -164,16 +180,16 @@ const Projects = () => {
         if (badge) {
           gsap.fromTo(
             badge,
-            { opacity: 0, scale: 0.85 },
+            { opacity: 0, scale: 0.35 },
             {
               opacity: 1,
               scale: 1,
-              duration: 0.5,
-              ease: "power2.out",
+              duration: 0.6,
+              ease: "back.out(2)",
               clearProps: "opacity,transform",
               scrollTrigger: {
                 trigger: row,
-                start: "top 85%",
+                start: "top 82%",
                 once: true,
               },
             }
@@ -183,16 +199,17 @@ const Projects = () => {
         if (card) {
           gsap.fromTo(
             card,
-            { opacity: 0, x: isEven ? -20 : 20 },
+            { opacity: 0, x: isEven ? -40 : 40, y: 15 },
             {
               opacity: 1,
               x: 0,
-              duration: 0.65,
-              ease: "power2.out",
+              y: 0,
+              duration: 0.75,
+              ease: "power3.out",
               clearProps: "opacity,transform",
               scrollTrigger: {
                 trigger: row,
-                start: "top 85%",
+                start: "top 82%",
                 once: true,
               },
             }
@@ -221,10 +238,10 @@ const Projects = () => {
       {displayProjects && displayProjects.length > 0 ? (
         <div className="relative w-full mx-auto">
           {/* Central Vertical Timeline Spine (Desktop) */}
-          <div className="hidden md:block absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
+          <div className="project-timeline-spine origin-top hidden md:block absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
 
           {/* Left Vertical Timeline Spine (Mobile) */}
-          <div className="md:hidden absolute left-5 top-4 bottom-4 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
+          <div className="project-timeline-spine origin-top md:hidden absolute left-5 top-4 bottom-4 w-0.5 bg-gradient-to-b from-sky-500/50 via-sky-500/20 to-transparent pointer-events-none" />
 
           <div className="space-y-12 md:space-y-16">
             {displayProjects.map((project, index) => {
