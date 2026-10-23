@@ -104,7 +104,7 @@ const About = () => {
                     className="w-full h-auto object-cover block"
                   />
                   <div className="absolute bottom-2 left-2 right-2 bg-gray-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-gray-700/50 text-[11px] font-medium text-sky-400 text-center">
-                    UI/UX Designer • Researcher
+                    Product &amp; Interaction Design
                   </div>
                 </div>
               </div>
@@ -119,24 +119,40 @@ const About = () => {
               </h2>
             </div>
 
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              {aboutInfo?.aboutParagraph ||
-                "I design clean, functional, and user-friendly digital products. With a background in Computer Science, I bridge the gap between design and engineering - understanding code helps me create interfaces that are intuitive for users and practical for developers to build. I also have an active interest in scientific research, which keeps my design decisions grounded in user data, structured problem-solving, and intentional UX architecture."}
-            </p>
+            <div className="space-y-2 text-xs sm:text-sm text-gray-300 leading-relaxed">
+              <p>
+                I design clean, functional, and user-friendly digital products. With a background in Computer Science &amp; Engineering, I bridge the gap between design and engineering - understanding code helps me create interfaces that are intuitive for users and practical for developers to build.
+              </p>
+              <p className="text-gray-400">
+                I also have an active interest in scientific research, which keeps my design decisions grounded in user data, structured problem-solving, and intentional UX architecture.
+              </p>
+            </div>
 
-            {/* Quick Highlight Metrics / Strengths */}
-            <div className="grid grid-cols-3 gap-2 pt-1 text-center">
-              <div className="bg-gray-900/80 border border-gray-800 rounded-xl p-2.5">
-                <span className="text-xs font-bold text-sky-400 block font-mono">Q1</span>
-                <span className="text-[10px] text-gray-400 leading-tight block mt-0.5">Elsevier Paper</span>
+            {/* Quick Highlight Cards */}
+            <div className="grid grid-cols-3 gap-2.5 pt-2">
+              <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-center shadow-sm hover:border-gray-700 transition">
+                <span className="text-xs sm:text-sm font-bold text-white block">
+                  Q1 Elsevier
+                </span>
+                <span className="text-[10px] text-sky-400 font-medium block mt-0.5">
+                  Published Paper
+                </span>
               </div>
-              <div className="bg-gray-900/80 border border-gray-800 rounded-xl p-2.5">
-                <span className="text-xs font-bold text-emerald-400 block font-mono">Figma</span>
-                <span className="text-[10px] text-gray-400 leading-tight block mt-0.5">Design Systems</span>
+              <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-center shadow-sm hover:border-gray-700 transition">
+                <span className="text-xs sm:text-sm font-bold text-white block">
+                  Figma Systems
+                </span>
+                <span className="text-[10px] text-sky-400 font-medium block mt-0.5">
+                  Design &amp; Prototype
+                </span>
               </div>
-              <div className="bg-gray-900/80 border border-gray-800 rounded-xl p-2.5">
-                <span className="text-xs font-bold text-amber-400 block font-mono">B.Sc.</span>
-                <span className="text-[10px] text-gray-400 leading-tight block mt-0.5">CSE Degree</span>
+              <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-center shadow-sm hover:border-gray-700 transition">
+                <span className="text-xs sm:text-sm font-bold text-white block">
+                  B.Sc. Degree
+                </span>
+                <span className="text-[10px] text-sky-400 font-medium block mt-0.5 leading-tight">
+                  Computer Science &amp; Engineering
+                </span>
               </div>
             </div>
           </div>
